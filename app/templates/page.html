@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ritelco - Telecommunications Solutions</title>
+    <title>Riaño Telecomunicaciones</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
@@ -119,185 +119,66 @@
             color: var(--color-teal);
         }
 
-        .services {
-            background-color: var(--color-dark);
-            color: var(--color-white);
-            padding: 80px 0;
-        }
 
-        h2 {
-            font-size: 36px;
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--color-white);
-        }
-
-        .service-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        /* Animación de entrada y hover */
-        .service-card {
-            background-color: var(--color-dark);
-            color: var(--color-white);
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid var(--color-teal);
-            transform: translateX(200px);
-            opacity: 0;
-            animation: slideIn 0.6s forwards;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            0% {
-                transform: translateX(200px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .service-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Tarjetas con fondo teal */
-        #mobile-networks,
-        #high-speed-internet,
-        #global-connect {
-            background-color: var(--color-teal);
-            color: var(--color-white);
-        }
-
-        #mobile-networks i,
-        #high-speed-internet i,
-        #global-connect i {
-            color: var(--color-white);
-        }
-
-        #mobile-networks h3,
-        #high-speed-internet h3,
-        #global-connect h3 {
-            color: var(--color-white);
-        }
-
-        .why-choose-us {
-            padding: 80px 0;
-            background-color: var(--color-dark);
-        }
-
-        .reasons-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .reason {
+        .cards {
             display: flex;
-            align-items: flex-start;
+            flex-direction: row;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
         }
 
-        .reason i {
-            color: var(--color-teal);
-            font-size: 24px;
-            margin-right: 20px;
-        }
-
-        .reason h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--color-white);
-        }
-
-        .cta {
-            background-color: var(--color-dark);
+        .cards .card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
             text-align: center;
-            padding: 80px 0;
-            border-top: 1px solid var(--color-teal);
-            border-bottom: 1px solid var(--color-teal);
+            height: 150px;
+            width: 300px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 400ms;
+            background-color: var(--color-teal);
         }
 
-        .cta h2 {
-            margin-bottom: 20px;
+        .cards .card p.tip {
+            font-size: 1em;
+            font-weight: 700;
         }
 
-        .cta p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: var(--color-white);
+        .cards .card p.second-text {
+            font-size: 0.7em;
         }
 
+        .cards .card:hover {
+            transform: scale(1.1);
+        }
+
+        .cards:hover > .card:not(:hover) {
+            filter: blur(10px);
+            transform: scale(0.9);
+        }
+
+        /* Estilos del resto del sitio */
         footer {
             background-color: var(--color-dark);
             padding: 40px 0;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .footer-nav {
-            margin-top: 20px;
-        }
-
-        .footer-nav a {
-            color: var(--color-white);
-            text-decoration: none;
-            margin: 0 10px;
-        }
-
-        .copyright {
             text-align: center;
             font-size: 14px;
             color: #888;
-        }
-
-        @media (min-width: 768px) {
-            .desktop-nav {
-                display: block;
-            }
-
-            .mobile-menu-toggle {
-                display: none;
-            }
-
-            .service-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .reasons-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-content {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
-            .footer-nav {
-                margin-top: 0;
-            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <div class="logo">Ritelco</div>
+            <div class="logo">RITELCO</div>
             <nav class="desktop-nav">
                 <a href="#">Home</a>
                 <a href="#">Services</a>
-                <a href="#">About</a>
+                <a href="#">Inventory</a>
                 <a href="#">Contact</a>
             </nav>
             <button class="mobile-menu-toggle" aria-label="Toggle menu">
@@ -305,13 +186,6 @@
             </button>
         </div>
     </header>
-
-    <nav class="mobile-nav">
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </nav>
 
     <main>
         <section class="hero">
@@ -322,24 +196,22 @@
             </div>
         </section>
 
+        <!-- Sección de Tarjetas -->
         <section class="services">
             <div class="container">
                 <h2>Our Services</h2>
-                <div class="service-grid">
-                    <div class="service-card" id="mobile-networks">
-                        <i data-lucide="phone"></i>
-                        <h3>Mobile Networks</h3>
-                        <p>Stay connected on-the-go with our reliable mobile network coverage.</p>
+                <div class="cards">
+                    <div class="card">
+                        <p class="tip">Mobile Networks</p>
+                        <p class="second-text">Stay connected on-the-go with our reliable mobile network coverage.</p>
                     </div>
-                    <div class="service-card" id="high-speed-internet">
-                        <i data-lucide="wifi"></i>
-                        <h3>High-Speed Internet</h3>
-                        <p>Enjoy blazing-fast internet speeds for seamless browsing and streaming.</p>
+                    <div class="card">
+                        <p class="tip">High-Speed Internet</p>
+                        <p class="second-text">Enjoy blazing-fast internet speeds for seamless browsing and streaming.</p>
                     </div>
-                    <div class="service-card" id="global-connect">
-                        <i data-lucide="globe"></i>
-                        <h3>Global Connectivity</h3>
-                        <p>Connect with the world through our international telecommunications services.</p>
+                    <div class="card">
+                        <p class="tip">Global Connectivity</p>
+                        <p class="second-text">Connect with the world through our international telecommunications services.</p>
                     </div>
                 </div>
             </div>
@@ -347,14 +219,7 @@
     </main>
 
     <footer>
-        <div class="container footer-content">
-            <p>&copy; 2024 Ritelco. All rights reserved.</p>
-            <nav class="footer-nav">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
-            </nav>
-        </div>
+        <p>&copy; 2024 Ritelco. All rights reserved.</p>
     </footer>
 
     <script>
@@ -368,5 +233,5 @@
             body.classList.toggle('mobile-menu-open');
         });
     </script>
-</body>
+</body> 
 </html>

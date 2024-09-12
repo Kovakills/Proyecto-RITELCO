@@ -26,7 +26,7 @@ def create_app():
     baja_tension_routes, equipos_media_tension_routes,
     estante_routes, electronica_routes, herramientas_electricas_routes,
     herramientas_inalambricas_routes, respels_routes,
-    filtros_routes, auth_routes, planta_routes, herramientas_routes, spt_routes
+    filtros_routes, auth_routes, planta_routes, herramientas_routes, spt_routes, page_routes
 )
 
 
@@ -45,6 +45,7 @@ def create_app():
     app.register_blueprint(planta_routes.bp)
     app.register_blueprint(herramientas_routes.bp)
     app.register_blueprint(spt_routes.bp)
+    app.register_blueprint(page_routes.bp)
 
 
     with app.app_context():

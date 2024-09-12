@@ -4,7 +4,7 @@ from app.models.usuario import Usuario
 
 bp = Blueprint('auth', __name__)
 
-@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/auth', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
