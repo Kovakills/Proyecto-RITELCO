@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritelco - Telecommunications Solutions</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --color-white: #fff;
+            --color-dark: #1f2029;
+            --color-teal: #27a9c0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--color-dark);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--color-teal);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--color-teal);
+        }
+
+        .desktop-nav {
+            display: none;
+        }
+
+        .desktop-nav a {
+            color: var(--color-white);
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .mobile-menu-toggle {
+            background: none;
+            border: none;
+            color: var(--color-white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            background-color: var(--color-dark);
+            padding: 20px;
+            border-bottom: 1px solid var(--color-teal);
+        }
+
+        .mobile-nav a {
+            display: block;
+            color: var(--color-white);
+            text-decoration: none;
+            padding: 10px 0;
+        }
+
+        body.mobile-menu-open .mobile-nav {
+            display: block;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--color-white);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--color-white);
+        }
+
+        .cta-button {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--color-white);
+            color: var(--color-teal);
+        }
+
+        .services {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--color-white);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* Animación de entrada y hover */
+        .service-card {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--color-teal);
+            transform: translateX(200px);
+            opacity: 0;
+            animation: slideIn 0.6s forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(200px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tarjetas con fondo teal */
+        #mobile-networks,
+        #high-speed-internet,
+        #global-connect {
+            background-color: var(--color-teal);
+            color: var(--color-white);
+        }
+
+        #mobile-networks i,
+        #high-speed-internet i,
+        #global-connect i {
+            color: var(--color-white);
+        }
+
+        #mobile-networks h3,
+        #high-speed-internet h3,
+        #global-connect h3 {
+            color: var(--color-white);
+        }
+
+        .why-choose-us {
+            padding: 80px 0;
+            background-color: var(--color-dark);
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .reason {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .reason i {
+            color: var(--color-teal);
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .reason h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--color-white);
+        }
+
+        .cta {
+            background-color: var(--color-dark);
+            text-align: center;
+            padding: 80px 0;
+            border-top: 1px solid var(--color-teal);
+            border-bottom: 1px solid var(--color-teal);
+        }
+
+        .cta h2 {
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--color-white);
+        }
+
+        footer {
+            background-color: var(--color-dark);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-nav {
+            margin-top: 20px;
+        }
+
+        .footer-nav a {
+            color: var(--color-white);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        @media (min-width: 768px) {
+            .desktop-nav {
+                display: block;
+            }
+
+            .mobile-menu-toggle {
+                display: none;
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .reasons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .footer-nav {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Ritelco</div>
+            <nav class="desktop-nav">
+                <a href="#">Home</a>
+                <a href="#">Services</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Connect with the Future</h1>
+                <p>Experience lightning-fast connectivity with Ritelco's cutting-edge telecommunications solutions.</p>
+                <button class="cta-button">Get Started</button>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="service-grid">
+                    <div class="service-card" id="mobile-networks">
+                        <i data-lucide="phone"></i>
+                        <h3>Mobile Networks</h3>
+                        <p>Stay connected on-the-go with our reliable mobile network coverage.</p>
+                    </div>
+                    <div class="service-card" id="high-speed-internet">
+                        <i data-lucide="wifi"></i>
+                        <h3>High-Speed Internet</h3>
+                        <p>Enjoy blazing-fast internet speeds for seamless browsing and streaming.</p>
+                    </div>
+                    <div class="service-card" id="global-connect">
+                        <i data-lucide="globe"></i>
+                        <h3>Global Connectivity</h3>
+                        <p>Connect with the world through our international telecommunications services.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2024 Ritelco. All rights reserved.</p>
+            <nav class="footer-nav">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Toggle mobile menu
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const body = document.body;
+
+        mobileMenuToggle.addEventListener('click', () => {
+            body.classList.toggle('mobile-menu-open');
+        });
+    </script>
+</body>
+</html>
