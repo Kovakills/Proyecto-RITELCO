@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Refrigerante{% endblock %}
+
+{% block content %}
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #27a9c0;
+            background-color: #1f2029;
+        }
+    </style>
+    <div class="container mt-5">
+        <h1><center>Edit Refrigerante</center></h1>
+        <form method="POST" action="{{ url_for('respel.edit_respel', idrespel=respel.idrespel) }}">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" value="{{ respel.nombre }}" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion_producto">Descripción del Producto</label>
+                <input type="text" name="descripcion_producto" id="descripcion_producto" class="form-control"
+                    value="{{ respel.descripcion_producto }}" required>
+            </div>
+            <div class="form-group mt-2">
+                <label for="cantidad">Galones</label>
+                <input type="number" name="cantidad" id="cantidad" class="form-control" value="1" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="observacion">Observaciones:</label> <!-- Asegúrate de que el campo coincida -->
+                <textarea class="form-control" id="observacion" name="observacion">{{ respel.observacion }}</textarea>
+            </div>
+            <div class="form-group mt-2">
+                <label for="estante_id">Estante ID</label>
+                <select id="estante_id" name="estante_id" class="form-control" required>
+                    <option value="" disabled selected>Selecciona un estante</option>
+                    {% for estante in estantes %}
+                    <option value="{{ estante.id_estante }}" {% if estante.id_estante == respel.estante_id %}selected{% endif %}>
+                        {{ estante.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button class="btn btn-secondary" onclick="window.history.back();">Back</button>
+        </form>
+    </div>
+</body>
+{% endblock %}

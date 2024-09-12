@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Add Equipos de altura{% endblock %}
+
+{% block content %}
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #27a9c0;
+            background-color: #1f2029;
+        }
+
+        /* Estilo personalizado para los inputs */
+        .inputbox {
+            position: relative;
+            width: 100%; /* Para ocupar todo el ancho disponible */
+            margin-bottom: 20px; /* Separación entre los campos */
+        }
+
+        .inputbox input {
+            position: relative;
+            width: 100%;
+            padding: 20px 10px 10px;
+            background: transparent;
+            outline: none;
+            box-shadow: none;
+            border: none;
+            color: #fff;
+            font-size: 1em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            z-index: 10;
+            border-bottom: 2px solid #fff; /* Línea debajo del input */
+        }
+
+        .inputbox span {
+            position: absolute;
+            left: 0;
+            padding: 20px 10px 10px;
+            font-size: 1em;
+            color: #8f8f8f;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            pointer-events: none;
+        }
+
+        .inputbox input:valid ~ span,
+        .inputbox input:focus ~ span {
+            color: #27a9c0;
+            transform: translateX(-10px) translateY(-34px);
+            font-size: 0.75em;
+        }
+
+        .inputbox i {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: #27a9c0;
+            border-radius: 4px;
+            transition: 0.5s;
+            pointer-events: none;
+            z-index: 9;
+        }
+
+        .inputbox input:valid ~ i,
+        .inputbox input:focus ~ i {
+            height: 44px;
+        }
+
+        /* Estilo para los botones */
+        .btn-primary {
+            background-color: #27a9c0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: lightblue;
+        }
+
+        .btn-secondary {
+            background-color: #444;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #666;
+        }
+
+    </style>
+
+    <div class="container mt-5">
+        <h1><center>Add Equipos de altura</center></h1>
+        <form method="POST" action="{{ url_for('equipos_altura.add_equipos_altura') }}">
+            <div class="inputbox">
+                <input type="text" name="nombre" id="nombre" required>
+                <span>Nombre</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="descripcion_producto" id="descripcion_producto" required>
+                <span>Descripcion del producto</span>
+                <i></i>
+            </div>
+            <div class="form-group mt-2">
+                <label for="estante_id">Estante ID</label>
+                <select id="estante_id" name="estante_id" class="form-control" required>
+                    <option value="" disabled selected>Selecciona un estante</option>
+                    {% for estante in estantes %}
+                    <option value="{{ estante.id_estante }}">{{ estante.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Add</button>
+            <button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Back</button>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

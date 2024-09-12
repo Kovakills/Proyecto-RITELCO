@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block title %}Sistema puesta a tierra{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1><center>Sistema puesta a tierra</center></h1>
+
+    <!-- Tabla de datos -->
+    <table class="table table-striped" id="sistema_pt-table">
+        <thead>
+            <tr>
+                <th>Unidad de medida</th>
+                <th>Descripcion del producto</th>
+                <th>Cantidad</th>
+                <th>Observaciones</th>
+                <th>Estante ID</th>
+                <th>
+                    <div class="d-flex justify-content-between align-items-center">
+                        Acciones
+                        <input type="text" id="search-input" class="form-control ml-2" placeholder="Buscar..."
+                            onkeyup="searchTable()" style="width: 200px;">
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sistema_pt in data %}
+            <tr>
+                <td>{{ sistema_pt.unidad_medida }}</td>
+                <td>{{ sistema_pt.descripcion_producto }}</td>
+                <td>{{ sistema_pt.cantidad }}</td>
+                <td>{{ sistema_pt.observacion }}</td>
+                <td>{{ sistema_pt.estante_id }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ url_for('sistema_pt.edit_sistema_pt', idsistemapt=sistema_pt.idsistemapt) }}"
+                            class="edit-button">Edit</a>
+                        <form action="{{ url_for('sistema_pt.delete_sistema_pt', idsistemapt=sistema_pt.idsistemapt) }}"
+                            method="post" style="display:inline;">
+                            <button type="submit" class="delete-button">
+                                <svg class="svgIcon" viewBox="0 0 448 512">
+                                    <path
+                                        d="M135.2 17.7L128 32H32C14 32 0 46.3 0 64c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32 0-17.7-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32l21.2 339.2c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botón de agregar debajo de la tabla -->
+    <div class="d-flex justify-content-between">
+        <a href="{{ url_for('spt.get_spt') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ url_for('sistema_pt.add_sistema_pt') }}" class="btn-add" style="text-decoration: none;">Add
+            Sistema</a>
+    </div>
+</div>
+
+<script>
+    function searchTable() {
+        var input = document.getElementById("search-input");
+        var filter = input.value.toLowerCase();
+        var table = document.getElementById("sistema_pt-table");
+        var rows = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("td");
+            var match = false;
+            for (var j = 0; j < cells.length - 1; j++) {
+                if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            if (match) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+</script>
+<style>
+    table {
+        background-color: #494949;
+        /* Color de fondo de la tabla */
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #5f5f5f;
+        /* Color de borde de las celdas */
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #333;
+        /* Color de fondo de las cabeceras */
+        color: #fff;
+        /* Color del texto de las cabeceras */
+    }
+
+    td {
+        color: #ccc;
+        /* Color del texto de las celdas */
+    }
+
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        color: #27a9c0;
+        background-color: #1f2029;
+    }
+
+    /* From Uiverse.io by cssbuttons-io */
+    .btn-add {
+        --color: #27a9c0;
+        font-family: inherit;
+        display: inline-block;
+        width: 8em;
+        height: 2.6em;
+        line-height: 2.5em;
+        margin: 20px;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border: 2px solid var(--color);
+        transition: color 0.5s;
+        z-index: 1;
+        font-size: 17px;
+        border-radius: 6px;
+        font-weight: 500;
+        color: var(--color);
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-add:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: var(--color);
+        height: 150px;
+        width: 200px;
+        border-radius: 50%;
+    }
+
+    .btn-add:hover {
+        color: #ffffff;
+    }
+
+    .btn-add:before {
+        top: 100%;
+        left: 100%;
+        transition: all 0.7s;
+    }
+
+    .btn-add:hover:before {
+        top: -30px;
+        left: -30px;
+    }
+
+    .btn-add:active:before {
+        background: #27a9c0;
+        transition: background 0s;
+    }
+
+    /* Contenedor para los botones */
+    .btn-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        /* Espacio entre los botones */
+    }
+
+    /* Botón de eliminar */
+    .delete-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgb(20, 20, 20);
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        /* Simplificación de las transiciones */
+        overflow: hidden;
+        position: relative;
+    }
+
+    .delete-button .svgIcon {
+        width: 12px;
+        transition: width 0.3s ease;
+    }
+
+    .delete-button .svgIcon path {
+        fill: white;
+    }
+
+    .delete-button:hover {
+        width: 100px;
+        border-radius: 50px;
+        background-color: rgb(255, 69, 69);
+    }
+
+    .delete-button:hover .svgIcon {
+        width: 50px;
+        transform: translateY(60%);
+    }
+
+    .delete-button::before {
+        position: absolute;
+        top: -20px;
+        content: "Delete";
+        color: white;
+        font-size: 2px;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .delete-button:hover::before {
+        font-size: 13px;
+        opacity: 1;
+        transform: translateY(30px);
+    }
+
+    /* Botón de editar */
+    .edit-button {
+        width: 80px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: rgb(20, 20, 20);
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .edit-button:hover {
+        background-color: #27a9c0;
+        text-decoration: none;
+    }
+
+    /* Posicionar el botón de eliminar al lado del botón de editar */
+    .delete-button {
+        margin-left: 10px;
+        /* Espacio entre los botones */
+    }
+</style>
+{% endblock %}

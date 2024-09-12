@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Filtro{% endblock %}
+
+{% block content %}
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #27a9c0;
+            background-color: #1f2029;
+        }
+    </style>
+    <div class="container mt-5">
+        <h1><center>Editar Filtro</center></h1>
+        <form method="POST" action="{{ url_for('filtros.edit_filtros', id=filtros.id) }}">
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" class="form-control" id="marca" name="marca" value="{{ filtros.marca }}" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo_de_filtro">Tipo de Filtro:</label>
+                <input type="text" class="form-control" id="tipo_de_filtro" name="tipo_de_filtro"
+                    value="{{ filtros.tipo_de_filtro }}" required>
+            </div>
+            <div class="form-group">
+                <label for="referencia">Referencia:</label>
+                <input type="text" class="form-control" id="referencia" name="referencia"
+                    value="{{ filtros.referencia }}" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ filtros.cantidad }}"
+                    min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="observacion">Observaciones:</label> <!-- Asegúrate de que el campo coincida -->
+                <textarea class="form-control" id="observacion" name="observacion">{{ filtros.observacion }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="estante_id">Estante:</label>
+                <select class="form-control" id="estante_id" name="estante_id" required>
+                    <option value="" disabled selected>Selecciona un estante</option>
+                    {% for estante in estantes %}
+                    <option value="{{ estante.id_estante }}" {% if estante.id_estante==filtros.estante_id %}selected{%
+                        endif %}>{{ estante.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a href="{{ url_for('filtros.get_filtros') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Add filtros{% endblock %}
+
+{% block content %}
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #27a9c0;
+            background-color: #1f2029;
+        }
+    </style>
+    <div class="section">
+        <div class="container mt-5">
+            <h1><center>Add filtro</center></h1>
+            <form method="POST" action="{{ url_for('filtros.add_filtros') }}">
+                <div class="form-group">
+                    <label for="nombre">Marca</label>
+                    <input type="text" name="marca" id="marca" class="form-control" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="tipo_de_filtro">Tipo de filtro</label>
+                    <input type="text" name="tipo_de_filtro" id="tipo_de_filtro" class="form-control" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="referencia">Referencia</label>
+                    <input type="text" name="referencia" id="referencia" class="form-control" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" name="cantidad" id="cantidad" class="form-control" value="" min="" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="observacion">Observaciones</label>
+                    <input type="text" name="observacion" id="observacion" class="form-control">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="estante_id">Estante ID</label>
+                    <select name="estante_id" id="estante_id" required>
+                        <option value="" disabled>Selecciona un estante</option>
+                        {% for estante in estantes %}
+                        <option value="{{ estante.id_estante }}" {% if estante.id_estante==estante.estante_id
+                            %}selected{% endif %}>{{ estante.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Añadir</button>
+                <button class="btn btn-secondary" onclick="window.history.back();">Atras</button>
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}
+</body>

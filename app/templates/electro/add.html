@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Add electronica{% endblock %}
+
+{% block content %}
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #27a9c0;
+            background-color: #1f2029;
+        }
+    </style>
+    <div class="container mt-5">
+        <h1><center>Add electronica</center></h1>
+        <form method="POST" action="{{ url_for('electronica.add_electronica') }}">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion_producto">Descripcion del producto</label>
+                <input type="text" name="descripcion_producto" id="descripcion_producto" class="form-control" required>
+            </div>
+            <div class="form-group mt-2">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" name="cantidad" id="cantidad" class="form-control" value="" min="" required>
+            </div>
+            <div class="form-group">
+                <label for="estante_id">Estante ID</label>
+                <select id="estante_id" name="estante_id" required>
+                    <option value="" disabled selected>Selecciona un estante</option>
+                    {% for estante in estantes %}
+                    <option value="{{ estante.id_estante }}" {% if estante.id_estante==estante.estante_id %}selected{%
+                        endif %}>{{ estante.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+            <button class="btn btn-secondary" onclick="window.history.back();">Back</button>
+        </form>
+    </div>
+</body>
+{% endblock %}
