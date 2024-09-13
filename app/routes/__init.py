@@ -18,6 +18,7 @@ from routes import page_bp
 
 
 
+
 def register_blueprints(app):
     app.register_blueprint(aceite_bp, url_prefix='/aceites')
     app.register_blueprint(baja_tension_bp, url_prefix='/baja_tension')
@@ -34,6 +35,7 @@ def register_blueprints(app):
     app.register_blueprint(herramientas_bp)
     app.register_blueprint(spt_bp)
     app.register_blueprint(page_bp)
+
     
 
 __all__ = ['register_blueprints']
