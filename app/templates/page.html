@@ -9,6 +9,13 @@
 </head>
 
 <body>
+    <div id="loader" class="loading-wave">
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+    </div>
+
     <style>
         :root {
             --color-white: #fff;
@@ -395,7 +402,67 @@
                 display: none;
             }
         }
+
+        /* Loader styles */
+        .loading-wave {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 9999;
+        }
+
+        .loading-bar {
+            width: 20px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #3498db;
+            border-radius: 5px;
+            animation: loading-wave-animation 1s ease-in-out infinite;
+        }
+
+        .loading-bar:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loading-bar:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-bar:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes loading-wave-animation {
+            0% {
+                height: 10px;
+            }
+
+            50% {
+                height: 50px;
+            }
+
+            100% {
+                height: 10px;
+            }
+        }
+
+        /* Hide the main content while loading */
+        body.loading {
+            overflow: hidden;
+        }
+
+        body.loading > *:not(#loader) {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
+
     <header id="header">
         <div class="container">
             <div class="logo">RITELCO</div>
@@ -527,9 +594,9 @@
             <div class="container">
                 <h2 class="animate-on-scroll">Contactanos</h2>
                 <form class="contact-form animate-on-scroll">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <input type="text" name="name" placeholder="Tu nombre" required>
+                    <input type="email" name="email" placeholder="Tu Email" required>
+                    <textarea name="message" placeholder="Tu mensaje" required></textarea>
                     <button type="submit" class="submit-button">Enviar mensaje</button>
                 </form>
             </div>
@@ -568,69 +635,83 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-    const header = document.getElementById('header');
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileNav = document.querySelector('.mobile-nav');
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const loader = document.getElementById('loader');
+            const body = document.body;
 
-    // Toggle mobile menu
-    mobileMenuToggle.addEventListener('click', () => {
-        mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
-    });
+            // Show loader
+            body.classList.add('loading');
 
-    // Scroll event for header
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.backgroundColor = 'rgba(31, 32, 41, 0.9)';
-        } else {
-            header.style.backgroundColor = 'transparent';
-        }
-    });
-
-    // Scroll animation
-    const animateOnScroll = () => {
-        const triggerBottom = window.innerHeight / 5 * 4;
-
-        animatedElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-
-            if (elementTop < triggerBottom) {
-                element.classList.add('show');
-            } else {
-                element.classList.remove('show');
-            }
-        });
-    };
-
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll(); // Initial check
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+            // Hide loader when the page is fully loaded
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    body.classList.remove('loading');
+                    loader.style.display = 'none';
+                }, 500); // Delay for 500ms to ensure smooth transition
             });
 
-            // Close mobile menu if open
-            mobileNav.style.display = 'none';
+            const header = document.getElementById('header');
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+            // Toggle mobile menu
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Scroll event for header
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(31, 32, 41, 0.9)';
+                } else {
+                    header.style.backgroundColor = 'transparent';
+                }
+            });
+
+            // Scroll animation
+            const animateOnScroll = () => {
+                const triggerBottom = window.innerHeight / 5 * 4;
+
+                animatedElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+
+                    if (elementTop < triggerBottom) {
+                        element.classList.add('show');
+                    } else {
+                        element.classList.remove('show');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Initial check
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    mobileNav.style.display = 'none';
+                });
+            });
+
+            // Form submission
+            const contactForm = document.querySelector('.contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Here you would typically send the form data to a server
+                alert('Thank you for your message. We will get back to you soon!');
+                contactForm.reset();
+            });
+
+            // Initialize Lucide icons
+            lucide.createIcons();
         });
-    });
-
-    // Form submission
-    const contactForm = document.querySelector('.contact-form');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Here you would typically send the form data to a server
-        alert('Thank you for your message. We will get back to you soon!');
-        contactForm.reset();
-    });
-
-    // Initialize Lucide icons
-    lucide.createIcons();
-});
     </script>
 </body>
 
