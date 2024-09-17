@@ -6,8 +6,6 @@
 
 <body>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-
         body {
             font-family: 'Poppins', sans-serif;
             font-weight: 300;
@@ -15,46 +13,148 @@
             color: #27a9c0;
             background-color: #1f2029;
         }
+
+        /* Estilo personalizado para los inputs */
+        .inputbox {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .inputbox input, .inputbox select, .inputbox textarea {
+            position: relative;
+            width: 100%;
+            padding: 20px 10px 10px;
+            background: transparent;
+            outline: none;
+            box-shadow: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            z-index: 10;
+        }
+
+        .inputbox textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .inputbox span {
+            position: absolute;
+            left: 0;
+            padding: 20px 10px 10px;
+            font-size: 1em;
+            color: #8f8f8f;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            pointer-events: none;
+        }
+
+        .inputbox input:valid ~ span,
+        .inputbox input:focus ~ span,
+        .inputbox textarea:valid ~ span,
+        .inputbox textarea:focus ~ span,
+        .inputbox select:focus ~ span {
+            color: #27a9c0;
+            transform: translateX(-10px) translateY(-34px);
+            font-size: 0.75em;
+        }
+
+        .inputbox i {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: #27a9c0;
+            border-radius: 4px;
+            transition: 0.5s;
+            pointer-events: none;
+            z-index: 9;
+        }
+
+        .inputbox input:valid ~ i,
+        .inputbox input:focus ~ i,
+        .inputbox textarea:valid ~ i,
+        .inputbox textarea:focus ~ i,
+        .inputbox select:focus ~ i {
+            height: 44px;
+        }
+
+        /* Estilo para los botones */
+        .btn-primary {
+            background-color: #27a9c0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: lightblue;
+        }
+
+        .btn-secondary {
+            background-color: #444;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #666;
+        }
     </style>
-    <div class="container mt-5">
-        <h1><center>Editar Filtro</center></h1>
-        <form method="POST" action="{{ url_for('filtros.edit_filtros', id=filtros.id) }}">
-            <div class="form-group">
-                <label for="marca">Marca:</label>
-                <input type="text" class="form-control" id="marca" name="marca" value="{{ filtros.marca }}" required>
-            </div>
-            <div class="form-group">
-                <label for="tipo_de_filtro">Tipo de Filtro:</label>
-                <input type="text" class="form-control" id="tipo_de_filtro" name="tipo_de_filtro"
-                    value="{{ filtros.tipo_de_filtro }}" required>
-            </div>
-            <div class="form-group">
-                <label for="referencia">Referencia:</label>
-                <input type="text" class="form-control" id="referencia" name="referencia"
-                    value="{{ filtros.referencia }}" required>
-            </div>
-            <div class="form-group">
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ filtros.cantidad }}"
-                    min="1" required>
-            </div>
-            <div class="form-group">
-                <label for="observacion">Observaciones:</label> <!-- Asegúrate de que el campo coincida -->
-                <textarea class="form-control" id="observacion" name="observacion">{{ filtros.observacion }}</textarea>
-            </div>
-            <div class="form-group">
-                <label for="estante_id">Estante:</label>
-                <select class="form-control" id="estante_id" name="estante_id" required>
-                    <option value="" disabled selected>Selecciona un estante</option>
-                    {% for estante in estantes %}
-                    <option value="{{ estante.id_estante }}" {% if estante.id_estante==filtros.estante_id %}selected{%
-                        endif %}>{{ estante.nombre }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-            <a href="{{ url_for('filtros.get_filtros') }}" class="btn btn-secondary">Cancelar</a>
-        </form>
+
+    <div class="section">
+        <div class="container mt-5">
+            <h1><center>Editar Filtro</center></h1>
+            <form method="POST" action="{{ url_for('filtros.edit_filtros', id=filtros.id) }}">
+                <div class="inputbox">
+                    <input type="text" name="marca" id="marca" value="{{ filtros.marca }}" required>
+                    <span>Marca</span>
+                    <i></i>
+                </div>
+                <div class="inputbox">
+                    <input type="text" name="tipo_de_filtro" id="tipo_de_filtro" value="{{ filtros.tipo_de_filtro }}" required>
+                    <span>Tipo de filtro</span>
+                    <i></i>
+                </div>
+                <div class="inputbox">
+                    <input type="text" name="referencia" id="referencia" value="{{ filtros.referencia }}" required>
+                    <span>Referencia</span>
+                    <i></i>
+                </div>
+                <div class="inputbox">
+                    <input type="number" name="cantidad" id="cantidad" value="{{ filtros.cantidad }}" min="1" required>
+                    <span>Cantidad</span>
+                    <i></i>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="observacion">Observaciones</label>
+                    <input type="text" name="observacion" id="observacion" value="{{ filtros.observacion }}" class="form-control">
+                </div>
+                <div class="form-group mt-2">
+                    <label for="estante_id">Estante</label>
+                    <select id="estante_id" name="estante_id" required class="form-control">
+                        <option value="" disabled>Selecciona un estante</option>
+                        {% for estante in estantes %}
+                        <option value="{{ estante.id_estante }}" {% if estante.id_estante == respel.estante_id %}selected{% endif %}>{{ estante.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
+                <a href="{{ url_for('filtros.get_filtros') }}" class="btn btn-secondary mt-3">Cancelar</a>
+            </form>
+        </div>
     </div>
 </body>
+
 {% endblock %}

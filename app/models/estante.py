@@ -15,3 +15,5 @@ class Estantes(db.Model):
     filtros = db.relationship('Filtros', back_populates='estante')
     sistema_pt = db.relationship('SistemaPT', back_populates='estante')
     equipos_altura = db.relationship('EquiposAltura', back_populates='estante')
+    equipos_rescate = db.relationship('EquiposRescate', back_populates='estante')
+

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Inventario{% endblock %}
+{% block title %}Equipos{% endblock %}
 
 {% block content %}
 <div class="section">
@@ -8,15 +8,13 @@
         <div class="row full-height justify-content-center">
             <div class="col-12 text-center align-self-center py-5">
                 <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                    <h1>¡Bienvenido, {{ current_user.username }} al inventario de Ritelco!</h1>
-                    <h2>Selecciona un Apartado:</h2>
+                    <h2>Selecciona un estante:</h2>
                     <div class="button-container">
                         <div class="btn-group-vertical">
-                            <a href="{{ url_for('planta.get_planta') }}" class="button">Planta</a>
-                            <a href="{{ url_for('herramientas.get_herramientas') }}" class="button">Herramientas</a>
-                            <a href="{{ url_for('spt.get_spt') }}" class="button">SPT</a>
-                            <a href="{{ url_for('equipos.get_spt') }}" class="button">Equipos</a>
-                            <a href="{{ url_for('electronica.get_electronica') }}" class="button">Electrónica</a>
+                            <a href="{{ url_for('equipos_rescate.get_equipos_rescate') }}"
+                                class="button">Estante de Equipos de rescate</a>
+                            <a href="{{ url_for('equipos_altura.get_equipos_altura') }}"
+                                class="button">Estante de Equipos de altura</a>
                         </div>
                     </div>
                 </div>

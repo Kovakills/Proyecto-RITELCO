@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Equipo de rescate{% endblock %}
+
+{% block content %}
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: #27a9c0;
+            background-color: #1f2029;
+        }
+    </style>
+    <div class="container mt-5">
+        <h1><CENTER>Edit Equipo de rescate</CENTER></h1>
+        <form method="POST"
+            action="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" value="{{ equipos_rescate.nombre }}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion_producto">Descripción del Producto</label>
+                <input type="text" name="descripcion_producto" id="descripcion_producto" class="form-control"
+                    value="{{ equipos_rescate.descripcion_producto }}" required>
+            </div>
+            <div class="form-group mt-2">
+                <label for="estante_id">Estante ID</label>
+                <select id="estante_id" name="estante_id" class="form-control" required>
+                    <option value="" disabled selected>Selecciona un estante</option>
+                    {% for estante in estantes %}
+                    <option value="{{ estante.id_estante }}" {% if estante.id_estante == equipos_rescate.estante_id %}selected{% endif %}>
+                        {{ estante.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            <button class="btn btn-secondary" onclick="window.history.back();">Back</button>
+        </form>
+    </div>
+</body>
+{% endblock %}

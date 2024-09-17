@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Edit Refrigerante{% endblock %}
+{% block title %}Add Equipos de rescate{% endblock %}
 
 {% block content %}
 
 <body>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+
         body {
             font-family: 'Poppins', sans-serif;
             font-weight: 300;
@@ -17,11 +19,11 @@
         /* Estilo personalizado para los inputs */
         .inputbox {
             position: relative;
-            width: 100%;
-            margin-bottom: 20px;
+            width: 100%; /* Para ocupar todo el ancho disponible */
+            margin-bottom: 20px; /* Separación entre los campos */
         }
 
-        .inputbox input, .inputbox select {
+        .inputbox input {
             position: relative;
             width: 100%;
             padding: 20px 10px 10px;
@@ -29,11 +31,12 @@
             outline: none;
             box-shadow: none;
             border: none;
-            color: #ffffff;
+            color: #fff;
             font-size: 1em;
             letter-spacing: 0.05em;
             transition: 0.5s;
             z-index: 10;
+            border-bottom: 2px solid #fff; /* Línea debajo del input */
         }
 
         .inputbox span {
@@ -48,8 +51,7 @@
         }
 
         .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span,
-        .inputbox select:focus ~ span {
+        .inputbox input:focus ~ span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -69,8 +71,7 @@
         }
 
         .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i,
-        .inputbox select:focus ~ i {
+        .inputbox input:focus ~ i {
             height: 44px;
         }
 
@@ -102,43 +103,35 @@
         .btn-secondary:hover {
             background-color: #666;
         }
+
     </style>
 
     <div class="container mt-5">
-        <h1><center>Edit Refrigerante</center></h1>
-        <form method="POST" action="{{ url_for('respel.edit_respel', idrespel=respel.idrespel) }}">
+        <h1><center>Add Equipos de rescate</center></h1>
+        <form method="POST" action="{{ url_for('equipos_rescate.add_equipos_rescate') }}">
             <div class="inputbox">
-                <input type="text" name="nombre" id="nombre" value="{{ respel.nombre }}" required>
+                <input type="text" name="nombre" id="nombre" required>
                 <span>Nombre</span>
                 <i></i>
             </div>
             <div class="inputbox">
-                <input type="text" name="descripcion_producto" id="descripcion_producto" value="{{ respel.descripcion_producto }}" required>
-                <span>Descripción del Producto</span>
-                <i></i>
-            </div>
-            <div class="inputbox mt-2">
-                <input type="number" name="cantidad" id="cantidad" value="1" min="1" required>
-                <span>Galones</span>
+                <input type="text" name="descripcion_producto" id="descripcion_producto" required>
+                <span>Descripcion del producto</span>
                 <i></i>
             </div>
             <div class="form-group mt-2">
-                <label for="observacion">Observaciones</label>
-                <input type="text" name="observacion" id="observacion" value="{{ respel.observacion }}" class="form-control">
-            </div>
-            <div class="form-group mt-2">
-                <label for="estante_id">Estante</label>
-                <select id="estante_id" name="estante_id" required class="form-control">
+                <label for="estante_id">Estante ID</label>
+                <select id="estante_id" name="estante_id" class="form-control" required>
                     <option value="" disabled selected>Selecciona un estante</option>
                     {% for estante in estantes %}
-                    <option value="{{ estante.id_estante }}" {% if estante.id_estante == respel.estante_id %}selected{% endif %}>{{ estante.nombre }}</option>
+                    <option value="{{ estante.id_estante }}">{{ estante.nombre }}</option>
                     {% endfor %}
                 </select>
             </div>
-            
-            <button type="submit" class="btn btn-primary">Actualizar</button>
-            <button class="btn btn-secondary" onclick="window.history.back();">Back</button>
+            <button type="submit" class="btn btn-primary mt-3">Add</button>
+            <button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Back</button>
         </form>
     </div>
 </body>
+
 {% endblock %}

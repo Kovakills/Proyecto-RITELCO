@@ -6,8 +6,6 @@
 
 <body>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-
         body {
             font-family: 'Poppins', sans-serif;
             font-weight: 300;
@@ -15,46 +13,139 @@
             color: #27a9c0;
             background-color: #1f2029;
         }
+
+        /* Estilo personalizado para los inputs */
+        .inputbox {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .inputbox input, .inputbox select {
+            position: relative;
+            width: 100%;
+            padding: 20px 10px 10px;
+            background: transparent;
+            outline: none;
+            box-shadow: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            z-index: 10;
+        }
+
+        .inputbox span {
+            position: absolute;
+            left: 0;
+            padding: 20px 10px 10px;
+            font-size: 1em;
+            color: #8f8f8f;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            pointer-events: none;
+        }
+
+        .inputbox input:valid ~ span,
+        .inputbox input:focus ~ span,
+        .inputbox select:focus ~ span {
+            color: #27a9c0;
+            transform: translateX(-10px) translateY(-34px);
+            font-size: 0.75em;
+        }
+
+        .inputbox i {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: #27a9c0;
+            border-radius: 4px;
+            transition: 0.5s;
+            pointer-events: none;
+            z-index: 9;
+        }
+
+        .inputbox input:valid ~ i,
+        .inputbox input:focus ~ i,
+        .inputbox select:focus ~ i {
+            height: 44px;
+        }
+
+        /* Estilo para los botones */
+        .btn-primary {
+            background-color: #27a9c0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: lightblue;
+        }
+
+        .btn-secondary {
+            background-color: #444;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #666;
+        }
     </style>
+
     <div class="section">
         <div class="container mt-5">
             <h1><center>Add filtro</center></h1>
             <form method="POST" action="{{ url_for('filtros.add_filtros') }}">
-                <div class="form-group">
-                    <label for="nombre">Marca</label>
-                    <input type="text" name="marca" id="marca" class="form-control" required>
+                <div class="inputbox">
+                    <input type="text" name="marca" id="marca" required>
+                    <span>Marca</span>
+                    <i></i>
                 </div>
-                <div class="form-group mt-2">
-                    <label for="tipo_de_filtro">Tipo de filtro</label>
-                    <input type="text" name="tipo_de_filtro" id="tipo_de_filtro" class="form-control" required>
+                <div class="inputbox">
+                    <input type="text" name="tipo_de_filtro" id="tipo_de_filtro" required>
+                    <span>Tipo de filtro</span>
+                    <i></i>
                 </div>
-                <div class="form-group mt-2">
-                    <label for="referencia">Referencia</label>
-                    <input type="text" name="referencia" id="referencia" class="form-control" required>
+                <div class="inputbox">
+                    <input type="text" name="referencia" id="referencia" required>
+                    <span>Referencia</span>
+                    <i></i>
                 </div>
-                <div class="form-group mt-2">
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" name="cantidad" id="cantidad" class="form-control" value="" min="" required>
+                <div class="inputbox mt-2">
+                    <input type="number" name="cantidad" id="cantidad" value="" min="" required>
+                    <span>Cantidad</span>
+                    <i></i>
                 </div>
                 <div class="form-group mt-2">
                     <label for="observacion">Observaciones</label>
                     <input type="text" name="observacion" id="observacion" class="form-control">
                 </div>
                 <div class="form-group mt-2">
-                    <label for="estante_id">Estante ID</label>
-                    <select name="estante_id" id="estante_id" required>
-                        <option value="" disabled>Selecciona un estante</option>
+                    <label for="estante_id">Estante</label>
+                    <select id="estante_id" name="estante_id" required class="form-control">
+                        <option value="" disabled selected>Selecciona un estante</option>
                         {% for estante in estantes %}
-                        <option value="{{ estante.id_estante }}" {% if estante.id_estante==estante.estante_id
-                            %}selected{% endif %}>{{ estante.nombre }}</option>
+                        <option value="{{ estante.id_estante }}">{{ estante.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Añadir</button>
-                <button class="btn btn-secondary" onclick="window.history.back();">Atras</button>
+                <button type="submit" class="btn btn-primary mt-3">Añadir</button>
+                <button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Atras</button>
             </form>
         </div>
     </div>
-
-    {% endblock %}
 </body>
+
+{% endblock %}

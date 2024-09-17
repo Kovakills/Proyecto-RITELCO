@@ -9,6 +9,7 @@ from .herramientas_electricas import HerramientasElectricas
 from .herramientas_inalambricas import HerramientasInalambricas
 from .respels import Respels
 from .sistema_pt import SistemaPT
+from .equipos_rescate import EquiposRescate
 
 
 
@@ -26,4 +27,5 @@ __all__ = [
     'Producto',
     'Respel',
     'SistemaPT',
+    'EquiposRescate',
 ]

@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block title %}Equipos de altura{% endblock %}
+{% block title %}Equipos de rescate{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h1><center>Equipos de altura</center></h1>
+    <h1><center>Equipos de rescate</center></h1>
 
     <!-- Tabla de datos -->
-    <table class="table table-striped" id="equipos_altura-table">
+    <table class="table table-striped" id="equipos_rescate-table">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -23,17 +23,17 @@
             </tr>
         </thead>
         <tbody>
-            {% for equipos_altura in data %}
+            {% for equipos_rescate in data %}
             <tr>
-                <td>{{ equipos_altura.nombre }}</td>
-                <td>{{ equipos_altura.descripcion_producto }}</td>
-                <td>{{ equipos_altura.estante_id }}</td>
+                <td>{{ equipos_rescate.nombre }}</td>
+                <td>{{ equipos_rescate.descripcion_producto }}</td>
+                <td>{{ equipos_rescate.estante_id }}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{ url_for('equipos_altura.edit_equipos_altura', idequiposaltura=equipos_altura.idequiposaltura) }}"
+                        <a href="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}"
                             class="edit-button">Edit</a>
                         <form
-                            action="{{ url_for('equipos_altura.delete_equipos_altura', idequiposaltura=equipos_altura.idequiposaltura) }}"
+                            action="{{ url_for('equipos_rescate.delete_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}"
                             method="post" style="display:inline;">
                             <button type="submit" class="delete-button">
                                 <svg class="svgIcon" viewBox="0 0 448 512">
@@ -53,7 +53,7 @@
     <!-- Botón de agregar debajo de la tabla -->
     <div class="d-flex justify-content-between">
         <a href="{{ url_for('equipos.get_spt') }}" class="btn btn-secondary">Back</a>
-        <a href="{{ url_for('equipos_altura.add_equipos_altura') }}" class="btn-add" style="text-decoration: none;">Add
+        <a href="{{ url_for('equipos_rescate.add_equipos_rescate') }}" class="btn-add" style="text-decoration: none;">Add
             Equipo</a>
     </div>
 </div>
@@ -62,7 +62,7 @@
     function searchTable() {
         var input = document.getElementById("search-input");
         var filter = input.value.toLowerCase();
-        var table = document.getElementById("equipos_altura-table");
+        var table = document.getElementById("equipos_rescate-table");
         var rows = table.getElementsByTagName("tr");
 
         for (var i = 1; i < rows.length; i++) {

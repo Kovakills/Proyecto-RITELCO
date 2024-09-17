@@ -15,6 +15,8 @@ from routes import planta_bp
 from routes import herramientas_bp
 from routes import spt_bp
 from routes import page_bp
+from routes import equipos_bp
+from routes import equipos_rescate_bp
 
 
 
@@ -35,6 +37,8 @@ def register_blueprints(app):
     app.register_blueprint(herramientas_bp)
     app.register_blueprint(spt_bp)
     app.register_blueprint(page_bp)
+    app.register_blueprint(equipos_bp)
+    app.register_blueprint(equipos_rescate_bp)
 
     
 
