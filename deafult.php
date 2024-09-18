@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riaño Telecomunicaciones</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+    --color-white: #fff;
+    --color-dark: #1f2029;
+    --color-teal: #27a9c0;
+    --color-light-gray: #f4f4f4;
+    --color-accent: #ff6b6b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background-color: rgba(31, 32, 41, 0.8);
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, padding 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+header.scrolled {
+    padding: 10px 0;
+    background-color: rgba(31, 32, 41, 0.95);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-teal);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo img {
+    max-height: 40px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.desktop-nav {
+    display: none;
+}
+
+.desktop-nav a {
+    color: var(--color-white);
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--color-teal);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.desktop-nav a:hover {
+    color: var(--color-teal);
+    transform: translateY(-2px);
+}
+
+.desktop-nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.mobile-menu-toggle {
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-toggle:hover {
+    transform: scale(1.1);
+}
+
+.mobile-nav {
+    display: none;
+    background-color: rgba(31, 32, 41, 0.95);
+    padding: 20px;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav.active {
+    transform: translateY(0);
+}
+
+.mobile-nav a {
+    display: block;
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 10px 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-nav a:hover {
+    color: var(--color-teal);
+    transform: translateX(10px);
+}
+
+.hero {
+    text-align: center;
+    padding: 120px 0 80px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-dark) 0%, #2a2b3d 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://source.unsplash.com/random/1920x1080?technology') no-repeat center center/cover;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+h1, h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--color-white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: var(--color-white);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button,
+.submit-button {
+    background-color: var(--color-teal);
+    color: var(--color-white);
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-button:hover,
+.submit-button:hover {
+    background-color: var(--color-white);
+    color: var(--color-teal);
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 10px 20px rgba(39, 169, 192, 0.3);
+}
+
+.services,
+.about,
+.testimonials,
+.contact {
+    padding: 80px 0;
+    position: relative;
+}
+
+.services::before,
+.about::before,
+.testimonials::before,
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://source.unsplash.com/random/1920x1080?abstract') no-repeat center center/cover;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: rgba(39, 169, 192, 0.1);
+    color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px) rotateY(10deg);
+    box-shadow: 0 20px 30px rgba(39, 169, 192, 0.2);
+}
+
+.card-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--color-teal);
+    transition: transform 0.3s;
+}
+
+.card:hover .card-icon {
+    transform: scale(1.2);
+}
+
+.card .tip {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card .second-text {
+    font-size: 14px;
+}
+
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+    margin-right: 40px;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.about-image img:hover {
+    transform: scale(1.05);
+}
+
+.testimonials {
+    background-color: var(--color-light-gray);
+    color: var(--color-dark);
+    padding: 80px 0;
+}
+
+.testimonial-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.testimonial-card {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px) rotateZ(2deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-content {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.quote-icon {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    color: var(--color-teal);
+    opacity: 0.2;
+    font-size: 48px;
+}
+
+.testimonial-content p {
+    font-style: italic;
+    color: var(--color-dark);
+    line-height: 1.6;
+}
+
+.client-info {
+    display: flex;
+    align-items: center;
+}
+
+.client-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    transition: transform 0.3s;
+}
+
+.testimonial-card:hover .client-image {
+    transform: scale(1.1);
+}
+
+.client-name {
+    font-weight: bold;
+    color: var(--color-teal);
+    margin-bottom: 5px;
+}
+
+.client-position {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    outline: none;
+}
+
+.contact-form textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+footer {
+    background-color: var(--color-dark);
+    padding: 40px 0 20px;
+    color: var(--color-white);
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    color: var(--color-teal);
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 5px;
+}
+
+.footer-section ul li a {
+    color: var(--color-white);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-teal);
+    transform: translateX(5px);
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a {
+    color: var(--color-white);
+    font-size: 24px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--color-teal);
+    transform: scale(1.2);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 20px;
+    color: #888;
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.animate-on-scroll.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+    .desktop-nav {
+        display: flex;
+    }
+
+    .mobile-menu-toggle {
+        display: none;
+    }
+}
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loading-wave {
+    width: 300px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.loading-bar {
+    width: 20px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: var(--color-teal);
+    border-radius: 5px;
+    animation: loading-wave-animation 1s ease-in-out infinite;
+}
+
+.loading-bar:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.loading-bar:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.loading-bar:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+@keyframes loading-wave-animation {
+    0% {
+        height: 10px;
+    }
+    50% {
+        height: 50px;
+    }
+    100% {
+        height: 10px;
+    }
+}
+
+body.loading > *:not(#loader) {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: var(--color-teal);
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: float 20s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+    </style>
+</head>
+<body class="loading">
+    <div id="loader">
+        <div class="loading-wave">
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo_ritelco.png" alt="Ritelco Logo">
+                <span>Ritelco</span>
+            </div>
+            <nav class="desktop-nav">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#about">About Us</a>
+                <a href="<?php echo htmlspecialchars(url_for('auth.login')); ?>">Inventario</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav">
+        <a href="#home">Home</a>
+        <a href="#services">Servicios</a>
+        <a href="#about">Sobre nosotros</a>
+        <a href="<?php echo htmlspecialchars(url_for('auth.login')); ?>">Inventario</a>
+        <a href="#contact">Contacto</a>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="particles"></div>
+            <div class="container">
+                <h1 class="animate-on-scroll">Riaño Telecomunicaciones</h1>
+                <p class="animate-on-scroll">Experience lightning-fast connectivity with Ritelco's cutting-edge
+                    telecommunications solutions.</p>
+                <a href="#services" class="cta-button animate-on-scroll">¡Empieza!</a>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="animate-on-scroll">Nuestros Servicios</h2>
+                <div class="cards">
+                    <div class="card animate-on-scroll">
+                        <i data-lucide="smartphone" class="card-icon"></i>
+                        <p class="tip">Mobile Networks</p>
+                        <p class="second-text">Stay connected on-the-go with our reliable mobile network coverage.</p>
+                    </div>
+                    <div class="card animate-on-scroll">
+                        <i data-lucide="wifi" class="card-icon"></i>
+                        <p class="tip">High-Speed Internet</p>
+                        <p class="second-text">Enjoy blazing-fast internet speeds for seamless browsing and streaming.</p>
+                    </div>
+                    <div class="card animate-on-scroll">
+                        <i data-lucide="globe" class="card-icon"></i>
+                        <p class="tip">Global Connectivity</p>
+                        <p class="second-text">Connect with the world through our international telecommunications services.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="animate-on-scroll">Sobre Ritelco</h2>
+                <div class="about-content">
+                    <div class="about-text animate-on-scroll">
+                        <p>Ritelco is a leading telecommunications company dedicated to providing innovative solutions
+                            for businesses and individuals. With over 20 years of experience, we've been at the
+                            forefront of technological advancements in the industry.</p>
+                        <p>Our mission is to connect people and businesses with reliable, high-speed networks that
+                            empower growth and foster communication across the globe.</p>
+                    </div>
+                    <div class="about-image animate-on-scroll">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Ritelco team working" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2 class="animate-on-scroll">What Our Clients Say</h2>
+                <div class="testimonial-cards">
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="testimonial-content">
+                            <i data-lucide="quote" class="quote-icon"></i>
+                            <p>"Ritelco's services have transformed our business communications. Their reliable network
+                                has increased our productivity tenfold."</p>
+                        </div>
+                        <div class="client-info">
+                            <img src="/placeholder.svg?height=60&width=60" alt="John Doe" class="client-image">
+                            <div>
+                                <p class="client-name">John Doe</p>
+                                <p class="client-position">CEO of TechCorp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="testimonial-content">
+                            <i data-lucide="quote" class="quote-icon"></i>
+                            <p>"The customer support team at Ritelco is exceptional. They're always there when we need
+                                them, ensuring our systems run smoothly."</p>
+                        </div>
+                        <div class="client-info">
+                            <img src="/placeholder.svg?height=60&width=60" alt="Jane Smith" class="client-image">
+                            <div>
+                                <p class="client-name">Jane Smith</p>
+                                <p class="client-position">IT Director at GlobalTrade</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="testimonial-content">
+                            <i data-lucide="quote" class="quote-icon"></i>
+                            <p>"Since switching to Ritelco, our international communication has improved dramatically.
+                                Their global connectivity solutions are unparalleled."</p>
+                        </div>
+                        <div class="client-info">
+                            <img src="/placeholder.svg?height=60&width=60" alt="Alex Johnson" class="client-image">
+                            <div>
+                                <p class="client-name">Alex Johnson</p>
+                                <p class="client-position">COO of WorldWide Logistics</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="animate-on-scroll">Contactanos</h2>
+                <form class="contact-form animate-on-scroll">
+                    <input type="text" name="name" placeholder="Tu nombre" required>
+                    <input type="email" name="email" placeholder="Tu Email" required>
+                    <textarea name="message" placeholder="Tu mensaje" required></textarea>
+                    <button type="submit" class="submit-button">Enviar mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Ritelco</h3>
+                    <p>Connecting you to the future of telecommunications.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="<?php echo htmlspecialchars(url_for('auth.dashboard')); ?>">Inventario</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Conectate con nuestras redes sociales</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p class="copyright">&copy; <?php echo date('Y'); ?> Ritelco.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const loader = document.getElementById('loader');
+    const body = document.body;
+
+    function showContent() {
+        body.classList.remove('loading');
+        loader.style.opacity = '0';
+        loader.style.visibility = 'hidden';
+    }
+
+    // Use only the timeout to ensure content is shown
+    setTimeout(showContent, 2000);
+
+    const header = document.getElementById('header');
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    const animateOnScroll = () => {
+        const triggerBottom = window.innerHeight / 5 * 4;
+
+        animatedElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+
+            if (elementTop < triggerBottom) {
+                element.classList.add('show');
+            } else {
+                element.classList.remove('show');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+
+            mobileNav.classList.remove('active');
+        });
+    });
+
+    const contactForm = document.querySelector('.contact-form');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you for your message. We will get back to you soon!');
+        contactForm.reset();
+    });
+
+    lucide.createIcons();
+
+    const particlesContainer = document.querySelector('.particles');
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 20}s`;
+        particlesContainer.appendChild(particle);
+    }
+});
+    </script>
+</body>
+</html>
