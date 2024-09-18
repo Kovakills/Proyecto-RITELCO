@@ -6,22 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riaño Telecomunicaciones</title>
     <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-
-<body>
-    <div id="loader" class="loading-wave">
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-        <div class="loading-bar"></div>
-    </div>
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-white: #fff;
             --color-dark: #1f2029;
             --color-teal: #27a9c0;
             --color-light-gray: #f4f4f4;
+            --color-accent: #ff6b6b;
         }
 
         * {
@@ -31,10 +23,11 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--color-dark);
             color: var(--color-white);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -45,13 +38,19 @@
         }
 
         header {
-            background-color: var(--color-dark);
+            background-color: rgba(31, 32, 41, 0.8);
             padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, padding 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            background-color: rgba(31, 32, 41, 0.95);
         }
 
         header .container {
@@ -64,6 +63,19 @@
             font-size: 24px;
             font-weight: bold;
             color: var(--color-teal);
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            max-height: 40px;
+            width: auto;
+            margin-right: 10px;
         }
 
         .desktop-nav {
@@ -74,11 +86,29 @@
             color: var(--color-white);
             text-decoration: none;
             margin-left: 20px;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-teal);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
         .desktop-nav a:hover {
             color: var(--color-teal);
+            transform: translateY(-2px);
+        }
+
+        .desktop-nav a:hover::after {
+            transform: scaleX(1);
         }
 
         .mobile-menu-toggle {
@@ -87,17 +117,29 @@
             color: var(--color-white);
             font-size: 24px;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            transform: scale(1.1);
         }
 
         .mobile-nav {
             display: none;
-            background-color: var(--color-dark);
+            background-color: rgba(31, 32, 41, 0.95);
             padding: 20px;
             position: fixed;
             top: 80px;
             left: 0;
             right: 0;
             z-index: 999;
+            backdrop-filter: blur(10px);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-nav.active {
+            transform: translateY(0);
         }
 
         .mobile-nav a {
@@ -105,11 +147,12 @@
             color: var(--color-white);
             text-decoration: none;
             padding: 10px 0;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .mobile-nav a:hover {
             color: var(--color-teal);
+            transform: translateX(10px);
         }
 
         .hero {
@@ -119,6 +162,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(135deg, var(--color-dark) 0%, #2a2b3d 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://source.unsplash.com/random/1920x1080?technology') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: -1;
         }
 
         h1,
@@ -126,6 +184,7 @@
             font-size: 48px;
             margin-bottom: 20px;
             color: var(--color-white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         h2 {
@@ -138,6 +197,9 @@
             font-size: 18px;
             margin-bottom: 30px;
             color: var(--color-white);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-button,
@@ -149,14 +211,17 @@
             font-size: 18px;
             border-radius: 30px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .cta-button:hover,
         .submit-button:hover {
             background-color: var(--color-white);
             color: var(--color-teal);
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 10px 20px rgba(39, 169, 192, 0.3);
         }
 
         .services,
@@ -164,6 +229,22 @@
         .testimonials,
         .contact {
             padding: 80px 0;
+            position: relative;
+        }
+
+        .services::before,
+        .about::before,
+        .testimonials::before,
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://source.unsplash.com/random/1920x1080?abstract') no-repeat center center/cover;
+            opacity: 0.05;
+            z-index: -1;
         }
 
         .cards {
@@ -174,7 +255,7 @@
         }
 
         .card {
-            background-color: var(--color-teal);
+            background-color: rgba(39, 169, 192, 0.1);
             color: var(--color-white);
             padding: 30px;
             border-radius: 10px;
@@ -182,16 +263,24 @@
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(39, 169, 192, 0.2);
+            transform: translateY(-10px) rotateY(10deg);
+            box-shadow: 0 20px 30px rgba(39, 169, 192, 0.2);
         }
 
         .card-icon {
             font-size: 48px;
             margin-bottom: 20px;
+            color: var(--color-teal);
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.2);
         }
 
         .card .tip {
@@ -226,6 +315,12 @@
         .about-image img {
             max-width: 100%;
             border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
         }
 
         .testimonials {
@@ -250,8 +345,8 @@
         }
 
         .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) rotateZ(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
         .testimonial-content {
@@ -284,6 +379,11 @@
             height: 60px;
             border-radius: 50%;
             margin-right: 15px;
+            transition: transform 0.3s;
+        }
+
+        .testimonial-card:hover .client-image {
+            transform: scale(1.1);
         }
 
         .client-name {
@@ -312,6 +412,14 @@
             border: none;
             background-color: rgba(255, 255, 255, 0.1);
             color: var(--color-white);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            outline: none;
         }
 
         .contact-form textarea {
@@ -354,11 +462,13 @@
         .footer-section ul li a {
             color: var(--color-white);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
         }
 
         .footer-section ul li a:hover {
             color: var(--color-teal);
+            transform: translateX(5px);
         }
 
         .social-icons {
@@ -369,11 +479,12 @@
         .social-icons a {
             color: var(--color-white);
             font-size: 24px;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .social-icons a:hover {
             color: var(--color-teal);
+            transform: scale(1.2);
         }
 
         .copyright {
@@ -421,75 +532,113 @@
             width: 20px;
             height: 10px;
             margin: 0 5px;
-            background-color: #3498db;
-            border-radius: 5px;
-            animation: loading-wave-animation 1s ease-in-out infinite;
-        }
 
-        .loading-bar:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .loading-bar:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-
-        .loading-bar:nth-child(4) {
-            animation-delay: 0.3s;
-        }
-
-        @keyframes loading-wave-animation {
-            0% {
-                height: 10px;
+            backgroun .d-color {
+                background-color: var(--color-teal);
+                border-radius: 5px;
+                animation: loading-wave-animation 1s ease-in-out infinite;
             }
 
-            50% {
-                height: 50px;
+            .loading-bar:nth-child(2) {
+                animation-delay: 0.1s;
             }
 
-            100% {
-                height: 10px;
+            .loading-bar:nth-child(3) {
+                animation-delay: 0.2s;
             }
-        }
 
-        /* Hide the main content while loading */
-        body.loading {
-            overflow: hidden;
-        }
+            .loading-bar:nth-child(4) {
+                animation-delay: 0.3s;
+            }
 
-        body.loading > *:not(#loader) {
-            opacity: 0;
-            visibility: hidden;
-            
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-        }
+            @keyframes loading-wave-animation {
+                0% {
+                    height: 10px;
+                }
 
-        .logo img {
-            max-height: 40px;
-            width: auto;
+                50% {
+                    height: 50px;
+                }
+
+                100% {
+                    height: 10px;
+                }
+            }
+
+            /* Hide the main content while loading */
+            body.loading {
+                overflow: hidden;
+            }
+
+            body.loading>*:not(#loader) {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            /* Particle animation */
+            .particles {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: -1;
+            }
+
+            .particle {
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                background-color: var(--color-teal);
+                border-radius: 50%;
+                opacity: 0.5;
+                animation: float 20s infinite;
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                }
+
+                50% {
+                    transform: translateY(-100px) rotate(180deg);
+                }
+
+                100% {
+                    transform: translateY(0) rotate(360deg);
+                }
+            }
         }
     </style>
+</head>
 
-<header id="header">
-    <div class="container">
-        <div class="logo">
-            <img src="img/logo_ritelco.png" alt="Ritelco Logo">
-        </div>
-        <nav class="desktop-nav">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#about">About Us</a>
-            <a href="{{ url_for('auth.login') }}">Inventario</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
-            <i data-lucide="menu"></i>
-        </button>
+<body>
+    <div id="loader" class="loading-wave">
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
+        <div class="loading-bar"></div>
     </div>
-</header>
+
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logo_ritelco.png" alt="Ritelco Logo">
+                <span></span>
+            </div>
+            <nav class="desktop-nav">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#about">About Us</a>
+                <a href="{{ url_for('auth.login') }}">Inventario</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
 
     <nav class="mobile-nav">
         <a href="#home">Home</a>
@@ -501,11 +650,12 @@
 
     <main>
         <section id="home" class="hero">
+            <div class="particles"></div>
             <div class="container">
                 <h1 class="animate-on-scroll">Riaño Telecomunicaciones</h1>
                 <p class="animate-on-scroll">Experience lightning-fast connectivity with Ritelco's cutting-edge
                     telecommunications solutions.</p>
-                <button class="cta-button animate-on-scroll">¡Empieza!</button>
+                <a href="#services" class="cta-button animate-on-scroll">¡Empieza!</a>
             </div>
         </section>
 
@@ -668,15 +818,15 @@
 
             // Toggle mobile menu
             mobileMenuToggle.addEventListener('click', () => {
-                mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
+                mobileNav.classList.toggle('active');
             });
 
             // Scroll event for header
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) {
-                    header.style.backgroundColor = 'rgba(31, 32, 41, 0.9)';
+                    header.classList.add('scrolled');
                 } else {
-                    header.style.backgroundColor = 'transparent';
+                    header.classList.remove('scrolled');
                 }
             });
 
@@ -708,7 +858,7 @@
                     });
 
                     // Close mobile menu if open
-                    mobileNav.style.display = 'none';
+                    mobileNav.classList.remove('active');
                 });
             });
 
@@ -723,6 +873,19 @@
 
             // Initialize Lucide icons
             lucide.createIcons();
+
+            // Particle animation
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                particlesContainer.appendChild(particle);
+            }
         });
     </script>
 </body>
