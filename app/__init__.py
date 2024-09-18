@@ -2,6 +2,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import os
+import pymysql
+
+# Aquí es donde le decimos a SQLAlchemy que use pymysql como MySQLdb
+pymysql.install_as_MySQLdb()
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -9,7 +13,7 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.urandom(24)
-    app.config.from_object('config.Config')
+    app.config.from_object('config.Config')  # Esto debe contener la URI de la base de datos
 
     db.init_app(app)
     login_manager.init_app(app)
@@ -17,18 +21,17 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
-        
         from .models.usuario import Usuario
         return Usuario.query.get(int(user_id))
 
+    # Importar y registrar los blueprints
     from app.routes import (
-    aceites_routes, equipos_altura_routes, sistema_pt_routes,
-    baja_tension_routes, equipos_media_tension_routes,
-    estante_routes, electronica_routes, herramientas_electricas_routes,
-    herramientas_inalambricas_routes, respels_routes,
-    filtros_routes, auth_routes, planta_routes, herramientas_routes, spt_routes, page_routes, equipos_routes, equipos_rescate_routes
-)
-
+        aceites_routes, equipos_altura_routes, sistema_pt_routes,
+        baja_tension_routes, equipos_media_tension_routes,
+        estante_routes, electronica_routes, herramientas_electricas_routes,
+        herramientas_inalambricas_routes, respels_routes,
+        filtros_routes, auth_routes, planta_routes, herramientas_routes, spt_routes, page_routes, equipos_routes, equipos_rescate_routes
+    )
 
     app.register_blueprint(aceites_routes.bp)
     app.register_blueprint(equipos_altura_routes.bp)
@@ -41,14 +44,13 @@ def create_app():
     app.register_blueprint(herramientas_inalambricas_routes.bp)
     app.register_blueprint(respels_routes.bp)
     app.register_blueprint(filtros_routes.bp)
-    app.register_blueprint(auth_routes.bp)  
+    app.register_blueprint(auth_routes.bp)
     app.register_blueprint(planta_routes.bp)
     app.register_blueprint(herramientas_routes.bp)
     app.register_blueprint(spt_routes.bp)
     app.register_blueprint(page_routes.bp)
     app.register_blueprint(equipos_routes.bp)
     app.register_blueprint(equipos_rescate_routes.bp)
-
 
     with app.app_context():
         db.create_all()
