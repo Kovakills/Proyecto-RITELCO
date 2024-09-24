@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riaño Telecomunicaciones</title>
+    <title>Riaño Telecomunicaciones - Soluciones Avanzadas en Telecomunicaciones</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
-        (function() {
+        (function () {
             emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS user ID
         })();
     </script>
@@ -120,7 +121,8 @@
             transform: translateZ(0);
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             font-size: 3rem;
             margin-bottom: 1.25rem;
             color: var(--color-white);
@@ -526,7 +528,7 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
+            border: 3px solid rgba(255, 255, 255, .3);
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 1s ease-in-out infinite;
@@ -534,7 +536,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 768px) {
@@ -592,9 +596,11 @@
             0% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-20px);
             }
+
             100% {
                 transform: translateY(0px);
             }
@@ -605,6 +611,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="progress-bar" id="progress-bar"></div>
     <header id="header">
@@ -620,9 +627,8 @@
                 <a href="#services">Servicios</a>
                 <a href="#about">Sobre Nosotros</a>
                 <a href="#projects">Proyectos</a>
-                <a href="#testimonials">Testimonios</a>
                 <a href="#faq">FAQ</a>
-                <a href="{{ url_for('auth.login') }}">inventario</a>
+                <a href="{{ url_for('auth.login') }}">Inventario</a>
                 <a href="#contact">Contacto</a>
             </nav>
         </div>
@@ -632,34 +638,34 @@
         <section id="home" class="hero">
             <div class="container">
                 <h1 class="floating">Riaño Telecomunicaciones</h1>
-                <p>Soluciones de telecomunicaciones de vanguardia de Ritelco.</p>
-                <a href="#contact" class="cta-button">¡Empieza ahora!</a>
+                <p>Innovación y excelencia en infraestructura y servicios de telecomunicaciones</p>
+                <a href="#contact" class="cta-button">Solicitar una consulta</a>
             </div>
         </section>
 
         <section id="services" class="services">
             <div class="container">
-                <h2>Nuestros Servicios</h2>
+                <h2>Nuestros Servicios Especializados</h2>
                 <div class="cards">
                     <div class="card">
-                        <i data-lucide="smartphone" class="card-icon"></i>
-                        <p class="tip">Redes Móviles</p>
-                        <p class="second-text">Se ofrece mantenimiento a antenas de red movil, agilizando y mejorando la calidad de la señal gracias a nuestro trabajo garantizado.</p>
+                        <i data-lucide="radio-tower" class="card-icon"></i>
+                        <p class="tip">Infraestructura de Red</p>
+                        <p class="second-text">Diseño, instalación y mantenimiento de torres de telecomunicaciones, antenas y equipos de transmisión para redes móviles 4G y 5G.</p>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="settings" class="card-icon"></i>
+                        <p class="tip">Mantenimiento Integral</p>
+                        <p class="second-text">Servicios de mantenimiento preventivo y correctivo para equipos de telecomunicaciones, plantas eléctricas, sistemas de climatización y puesta a tierra.</p>
+                    </div>
+                    <div class="card">
+                        <i data-lucide="zap" class="card-icon"></i>
+                        <p class="tip">Respuesta a Emergencias 24/7</p>
+                        <p class="second-text">Equipo especializado disponible las 24 horas para atender fallas críticas y garantizar la continuidad de los servicios de red.</p>
                     </div>
                     <div class="card">
                         <i data-lucide="wifi" class="card-icon"></i>
-                        <p class="tip">Mantenimiento preventivo y correctivo</p>
-                        <p class="second-text">Se realizan mantenimientos a plantas electricas estacionarias, a equipos de aire acondicionado, a sistema puesta a tierra y diferentes equipos.</p>
-                    </div>
-                    <div class="card">
-                        <i data-lucide="globe" class="card-icon"></i>
-                        <p class="tip">Atencion a emergencias</p>
-                        <p class="second-text">Atencion a fallas 24/7.</p>
-                    </div>
-                    <div class="card">
-                        <i data-lucide="radio-tower" class="card-icon"></i>
-                        <p class="tip">Instalación de Torres</p>
-                        <p class="second-text">Instalamos y mantenemos torres de telecomunicaciones para una cobertura óptima.</p>
+                        <p class="tip">Optimización de Redes</p>
+                        <p class="second-text">Análisis y mejora del rendimiento de redes móviles y fijas para maximizar la cobertura, capacidad y calidad de servicio.</p>
                     </div>
                 </div>
             </div>
@@ -667,21 +673,21 @@
 
         <section id="about" class="about">
             <div class="container">
-                <h2>Sobre Ritelco</h2>
-                <p>Ritelco es una empresa líder en telecomunicaciones dedicada a proporcionar soluciones innovadoras para empresas e individuos. Con más de 20 años de experiencia, hemos estado a la vanguardia de los avances tecnológicos en la industria.</p>
-                <p>Nuestra misión es conectar a las personas y las empresas con redes confiables y de alta velocidad que potencien el crecimiento y fomenten la comunicación en todo el mundo.</p>
+                <h2>Sobre Riaño Telecomunicaciones</h2>
+                <p>Riaño Telecomunicaciones es líder en el sector de infraestructura y servicios de telecomunicaciones, con más de dos décadas de experiencia en la implementación y mantenimiento de redes de última generación.</p>
+                <p>Nuestra misión es proporcionar soluciones tecnológicas avanzadas que impulsen la conectividad y la transformación digital de empresas y comunidades en toda la región.</p>
                 <div id="stats" class="stats">
                     <div class="stat">
                         <h3 id="clients-count">0</h3>
-                        <p>Clientes Satisfechos</p>
+                        <p>Clientes Corporativos</p>
                     </div>
                     <div class="stat">
                         <h3 id="projects-count">0</h3>
-                        <p>Proyectos Completados</p>
+                        <p>Proyectos de Infraestructura</p>
                     </div>
                     <div class="stat">
                         <h3 id="coverage-count">0</h3>
-                        <p>Km² de Cobertura</p>
+                        <p>Km² de Cobertura de Red</p>
                     </div>
                 </div>
             </div>
@@ -689,41 +695,18 @@
 
         <section id="projects" class="projects">
             <div class="container">
-                <h2>Nuestros Proyectos</h2>
+                <h2>Proyectos Destacados</h2>
                 <div class="project-card">
-                    <h3>Red 5G para Ciudad Metropolitana</h3>
-                    <p>Implementamos una red 5G completa para una gran área metropolitana, mejorando significativamente la velocidad y capacidad de conexión para millones de usuarios.</p>
+                    <h3>Despliegue de Red 5G Metropolitana</h3>
+                    <p>Implementación integral de infraestructura 5G en una importante área metropolitana, incluyendo la instalación de más de 500 small cells y actualización de estaciones base existentes.</p>
                 </div>
                 <div class="project-card">
-                    <h3>Conectividad Rural</h3>
-                    <p>Llevamos internet de alta velocidad a zonas rurales remotas, conectando comunidades y abriendo nuevas oportunidades de desarrollo.</p>
+                    <h3>Conectividad Rural de Alta Velocidad</h3>
+                    <p>Desarrollo de una red de fibra óptica y enlaces de microondas para proporcionar internet de banda ancha a más de 100 comunidades rurales, mejorando significativamente el acceso a servicios digitales.</p>
                 </div>
                 <div class="project-card">
-                    <h3>Infraestructura de IoT para Smart City</h3>
-                    <p>Diseñamos e implementamos la infraestructura de IoT para una ciudad inteligente, permitiendo la gestión eficiente de recursos y servicios urbanos.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="testimonials" class="testimonials">
-            <div class="container">
-                <h2>Testimonios</h2>
-                <div class="cards">
-                    <div class="testimonial-card">
-                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Cliente 1">
-                        <p>"Ritelco transformó nuestra conectividad. Su servicio es excepcional."</p>
-                        <p class="author">- Juan Pérez, CEO de TechCorp</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Cliente 2">
-                        <p>"Increíble atención al cliente y soluciones rápidas. ¡Los recomiendo!"</p>
-                        <p class="author">- María González, Gerente de IT</p>
-                    </div>
-                    <div class="testimonial-card">
-                        <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Cliente 3">
-                        <p>"La mejor decisión que tomamos fue trabajar con Ritelco. Son expertos."</p>
-                        <p class="author">- Carlos Rodríguez, Dueño de PyME</p>
-                    </div>
+                    <h3>Modernización de Red de Operador Nacional</h3>
+                    <p>Actualización completa de la infraestructura de red core y RAN para un operador móvil nacional, incluyendo la migración a tecnologías NFV y SDN para mejorar la flexibilidad y eficiencia operativa.</p>
                 </div>
             </div>
         </section>
@@ -732,21 +715,21 @@
             <div class="container">
                 <h2>Preguntas Frecuentes</h2>
                 <div class="question">
-                    <h3>¿Cuál es el tiempo de respuesta para emergencias? <i data-lucide="chevron-down"></i></h3>
+                    <h3>¿Cuál es su tiempo de respuesta para emergencias en la red? <i data-lucide="chevron-down"></i></h3>
                     <div class="answer">
-                        <p>Nuestro equipo de respuesta a emergencias está disponible 24/7 y generalmente responde en menos de 2 horas para problemas críticos.</p>
+                        <p>Nuestro equipo de respuesta rápida está disponible 24/7 y garantiza un tiempo de respuesta inicial de menos de 2 horas para problemas críticos que afecten la operatividad de la red.</p>
                     </div>
                 </div>
                 <div class="question">
-                    <h3>¿Ofrecen servicios de consultoría? <i data-lucide="chevron-down"></i></h3>
+                    <h3>¿Ofrecen servicios de consultoría en planificación de redes 5G? <i data-lucide="chevron-down"></i></h3>
                     <div class="answer">
-                        <p>Sí, ofrecemos servicios de consultoría para ayudar a las empresas a optimizar sus infraestructuras de telecomunicaciones y planificar futuras expansiones.</p>
+                        <p>Sí, contamos con un equipo de expertos en tecnología 5G que ofrece servicios de consultoría para la planificación, diseño y optimización de redes de nueva generación, adaptados a las necesidades específicas de cada cliente.</p>
                     </div>
                 </div>
                 <div class="question">
-                    <h3>¿Cuáles son sus áreas de cobertura? <i data-lucide="chevron-down"></i></h3>
+                    <h3>¿Cómo garantizan la calidad y seguridad en sus instalaciones? <i data-lucide="chevron-down"></i></h3>
                     <div class="answer">
-                        <p>Actualmente, ofrecemos servicios en toda la región, incluyendo áreas urbanas y rurales. Estamos en constante expansión para llegar a más lugares.</p>
+                        <p>Implementamos rigurosos protocolos de calidad y seguridad en todas nuestras operaciones. Nuestro personal está certificado en las últimas normas de la industria, y utilizamos herramientas avanzadas de monitoreo y diagnóstico para asegurar la integridad y rendimiento óptimo de las instalaciones.</p>
                     </div>
                 </div>
             </div>
@@ -782,7 +765,7 @@
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#about">Sobre Nosotros</a></li>
                         <li><a href="#projects">Proyectos</a></li>
-                        <li><a href="{{ url_for('auth.login') }}">inventario</a></li>
+                        <li><a href="{{ url_for('auth.login') }}">Inventario</a></li>
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contacto</a></li>
                     </ul>
@@ -824,12 +807,12 @@
 
     <script>
         // Manejar el envío del formulario
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Show spinner
             document.getElementById('spinner').style.display = 'inline-block';
-            
+
             // Disable submit button
             this.querySelector('button[type="submit"]').disabled = true;
 
@@ -843,7 +826,7 @@
 
             // Send the email using EmailJS
             emailjs.send('default_service', 'template_id', templateParams) // Replace 'template_id' with your EmailJS template ID
-                .then(function(response) {
+                .then(function (response) {
                     console.log('SUCCESS!', response.status, response.text);
                     document.getElementById('notification').textContent = 'Mensaje enviado con éxito';
                     document.getElementById('notification').classList.add('show');
@@ -851,7 +834,7 @@
                         document.getElementById('notification').classList.remove('show');
                     }, 3000);
                     document.getElementById('contact-form').reset();
-                }, function(error) {
+                }, function (error) {
                     console.log('FAILED...', error);
                     document.getElementById('notification').textContent = 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
                     document.getElementById('notification').classList.add('show');
@@ -859,7 +842,7 @@
                         document.getElementById('notification').classList.remove('show');
                     }, 3000);
                 })
-                .finally(function() {
+                .finally(function () {
                     // Hide spinner and re-enable submit button
                     document.getElementById('spinner').style.display = 'none';
                     document.querySelector('#contact-form button[type="submit"]').disabled = false;
@@ -867,7 +850,7 @@
         });
 
         // Cambiar el estilo del encabezado al hacer scroll
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const header = document.getElementById('header');
             const backToTop = document.getElementById('back-to-top');
             if (window.scrollY > 50) {
@@ -894,7 +877,7 @@
         const menuToggle = document.getElementById('menu-toggle');
         const nav = document.getElementById('nav');
 
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', function () {
             nav.classList.toggle('active');
         });
 
@@ -917,7 +900,7 @@
         });
 
         // Animación de parallax para el hero
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrollPosition = window.pageYOffset;
             document.querySelector('.hero::before').style.transform = `translateY(${scrollPosition * 0.5}px)`;
         });
@@ -943,7 +926,7 @@
         }
 
         // Manejar el botón "Volver arriba"
-        document.getElementById('back-to-top').addEventListener('click', function() {
+        document.getElementById('back-to-top').addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -970,7 +953,7 @@
         });
 
         chatSend.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', function(e) {
+        chatInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
@@ -988,7 +971,6 @@
             }
         }
 
-
         function addMessage(sender, text) {
             const messageElement = document.createElement('div');
             messageElement.classList.add(sender);
@@ -998,4 +980,5 @@
         }
     </script>
 </body>
+
 </html>
