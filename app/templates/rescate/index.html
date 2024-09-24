@@ -10,14 +10,17 @@
     <table class="table table-striped" id="equipos_rescate-table">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Descripcion del producto</th>
+                <th>Arnes</th>
+                <th>Eslingas</th>
+                <th>posicionamiento</th>
+                <th>caida en Y</th>
+                <th>Conectores</th>
+                <th>Cantidad</th>
                 <th>Estante ID</th>
                 <th>
                     <div class="d-flex justify-content-between align-items-center">
                         Acciones
-                        <input type="text" id="search-input" class="form-control ml-2" placeholder="Buscar..."
-                            onkeyup="searchTable()" style="width: 200px;">
+                        <input type="text" id="search-input" class="form-control ml-2" placeholder="Buscar..." onkeyup="searchTable()" style="width: 200px;">
                     </div>
                 </th>
             </tr>
@@ -25,21 +28,20 @@
         <tbody>
             {% for equipos_rescate in data %}
             <tr>
-                <td>{{ equipos_rescate.nombre }}</td>
-                <td>{{ equipos_rescate.descripcion_producto }}</td>
+                <td>{{ equipos_rescate.arnes }}</td>
+                <td>{{ equipos_rescate.eslingas }}</td>
+                <td>{{ equipos_rescate.posicionamiento }}</td>
+                <td>{{ equipos_rescate.caida_en_y }}</td>
+                <td>{{ equipos_rescate.conectores }}</td>
+                <td>{{ equipos_rescate.cantidad }}</td>
                 <td>{{ equipos_rescate.estante_id }}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}"
-                            class="edit-button">Edit</a>
-                        <form
-                            action="{{ url_for('equipos_rescate.delete_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}"
-                            method="post" style="display:inline;">
+                        <a href="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}" class="edit-button">Edit</a>
+                        <form action="{{ url_for('equipos_rescate.delete_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}" method="post" style="display:inline;">
                             <button type="submit" class="delete-button">
                                 <svg class="svgIcon" viewBox="0 0 448 512">
-                                    <path
-                                        d="M135.2 17.7L128 32H32C14 32 0 46.3 0 64c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32 0-17.7-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32l21.2 339.2c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                    </path>
+                                    <path d="M135.2 17.7L128 32H32C14 32 0 46.3 0 64c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32 0-17.7-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32l21.2 339.2c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
                                 </svg>
                             </button>
                         </form>
@@ -53,8 +55,7 @@
     <!-- Botón de agregar debajo de la tabla -->
     <div class="d-flex justify-content-between">
         <a href="{{ url_for('equipos.get_spt') }}" class="btn btn-secondary">Back</a>
-        <a href="{{ url_for('equipos_rescate.add_equipos_rescate') }}" class="btn-add" style="text-decoration: none;">Add
-            Equipo</a>
+        <a href="{{ url_for('equipos_rescate.add_equipos_rescate') }}" class="btn-add" style="text-decoration: none;">Add Equipo</a>
     </div>
 </div>
 
@@ -82,31 +83,26 @@
         }
     }
 </script>
+
 <style>
     table {
         background-color: #494949;
-        /* Color de fondo de la tabla */
         border-collapse: collapse;
     }
 
-    th,
-    td {
+    th, td {
         border: 1px solid #5f5f5f;
-        /* Color de borde de las celdas */
         padding: 10px;
         text-align: left;
     }
 
     th {
         background-color: #333;
-        /* Color de fondo de las cabeceras */
         color: #fff;
-        /* Color del texto de las cabeceras */
     }
 
     td {
         color: #ccc;
-        /* Color del texto de las celdas */
     }
 
     @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
@@ -119,7 +115,7 @@
         background-color: #1f2029;
     }
 
-    /* From Uiverse.io by cssbuttons-io */
+    /* Botón de agregar */
     .btn-add {
         --color: #27a9c0;
         font-family: inherit;
@@ -172,12 +168,11 @@
         transition: background 0s;
     }
 
-    /* Contenedor para los botones */
+    /* Contenedor de los botones de acciones */
     .btn-group {
         display: flex;
         align-items: center;
         gap: 10px;
-        /* Espacio entre los botones */
     }
 
     /* Botón de eliminar */
@@ -194,7 +189,6 @@
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
         cursor: pointer;
         transition: all 0.3s ease;
-        /* Simplificación de las transiciones */
         overflow: hidden;
         position: relative;
     }
@@ -256,12 +250,6 @@
     .edit-button:hover {
         background-color: #27a9c0;
         text-decoration: none;
-    }
-
-    /* Posicionar el botón de eliminar al lado del botón de editar */
-    .delete-button {
-        margin-left: 10px;
-        /* Espacio entre los botones */
     }
 </style>
 {% endblock %}

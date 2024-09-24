@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Edit Equipo de rescate{% endblock %}
+{% block title %}Edit Equipo de Rescate{% endblock %}
 
 {% block content %}
 
@@ -17,18 +17,31 @@
         }
     </style>
     <div class="container mt-5">
-        <h1><CENTER>Edit Equipo de rescate</CENTER></h1>
-        <form method="POST"
-            action="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}">
+        <h1><center>Edit Equipo de Rescate</center></h1>
+        <form method="POST" action="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" class="form-control" value="{{ equipos_rescate.nombre }}"
-                    required>
+                <label for="arnes">Arnés</label>
+                <input type="text" name="arnes" id="arnes" class="form-control" value="{{ equipos_rescate.arnes }}" required>
             </div>
             <div class="form-group">
-                <label for="descripcion_producto">Descripción del Producto</label>
-                <input type="text" name="descripcion_producto" id="descripcion_producto" class="form-control"
-                    value="{{ equipos_rescate.descripcion_producto }}" required>
+                <label for="eslingas">Eslingas</label>
+                <input type="text" name="eslingas" id="eslingas" class="form-control" value="{{ equipos_rescate.eslingas }}" required>
+            </div>
+            <div class="form-group">
+                <label for="posicionamiento">Posicionamiento</label>
+                <input type="text" name="posicionamiento" id="posicionamiento" class="form-control" value="{{ equipos_rescate.posicionamiento }}" required>
+            </div>
+            <div class="form-group">
+                <label for="caida_en_y">Caída en Y</label>
+                <input type="text" name="caida_en_y" id="caida_en_y" class="form-control" value="{{ equipos_rescate.caida_en_y }}" required>
+            </div>
+            <div class="form-group">
+                <label for="conectores">Conectores</label>
+                <input type="text" name="conectores" id="conectores" class="form-control" value="{{ equipos_rescate.conectores }}" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" name="cantidad" id="cantidad" class="form-control" value="{{ equipos_rescate.cantidad }}" min="1" required>
             </div>
             <div class="form-group mt-2">
                 <label for="estante_id">Estante ID</label>
@@ -41,7 +54,6 @@
                     {% endfor %}
                 </select>
             </div>
-            
             <button type="submit" class="btn btn-primary">Actualizar</button>
             <button class="btn btn-secondary" onclick="window.history.back();">Back</button>
         </form>
