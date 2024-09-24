@@ -627,9 +627,9 @@
                 <a href="#services">Servicios</a>
                 <a href="#about">Sobre Nosotros</a>
                 <a href="#projects">Proyectos</a>
-                <a href="#faq">FAQ</a>
-                <a href="{{ url_for('auth.login') }}">Inventario</a>
+                <a href="#faq">FAQ</a>               
                 <a href="#contact">Contacto</a>
+
             </nav>
         </div>
     </header>
@@ -764,10 +764,10 @@
                         <li><a href="#home">Inicio</a></li>
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#about">Sobre Nosotros</a></li>
-                        <li><a href="#projects">Proyectos</a></li>
-                        <li><a href="{{ url_for('auth.login') }}">Inventario</a></li>
+                        <li><a href="#projects">Proyectos</a></li>                        
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contacto</a></li>
+                        <li><a href="{{ url_for('auth.login') }}">Inventario</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -882,7 +882,7 @@
         });
 
         // Animación de entrada para las secciones
-        const sections = document.querySelectorAll('.services, .about, .contact, .testimonials, .projects, .faq');
+        const sections = document.querySelectorAll('.services, .about, .contact, .inventario, .projects, .faq');
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
