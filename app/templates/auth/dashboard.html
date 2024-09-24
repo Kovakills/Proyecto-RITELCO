@@ -5,17 +5,19 @@
 {% block content %}
 <div class="section">
     <div class="container">
-        <div class="row justify-content-center align-items-center min-vh-100">
-            <div class="col-12 col-md-8 col-lg-6 text-center">
-                <h1 class="mb-4">¡Bienvenido, {{ current_user.username }} al inventario de Ritelco!</h1>
-                <h2 class="mb-4">Selecciona un Apartado:</h2>
-                <div class="button-container">
-                    <div class="btn-group-vertical w-100">
-                        <a href="{{ url_for('planta.get_planta') }}" class="button mb-3">Planta</a>
-                        <a href="{{ url_for('herramientas.get_herramientas') }}" class="button mb-3">Herramientas</a>
-                        <a href="{{ url_for('spt.get_spt') }}" class="button mb-3">SPT</a>
-                        <a href="{{ url_for('equipos.get_spt') }}" class="button mb-3">Equipos</a>
-                        <a href="{{ url_for('electronica.get_electronica') }}" class="button mb-3">Electrónica</a>
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <h1>¡Bienvenido, {{ current_user.username }} al inventario de Ritelco!</h1>
+                    <h2>Selecciona un Apartado:</h2>
+                    <div class="button-container">
+                        <div class="btn-group-vertical">
+                            <a href="{{ url_for('planta.get_planta') }}" class="button">Planta</a>
+                            <a href="{{ url_for('herramientas.get_herramientas') }}" class="button">Herramientas</a>
+                            <a href="{{ url_for('spt.get_spt') }}" class="button">SPT</a>
+                            <a href="{{ url_for('equipos.get_spt') }}" class="button">Equipos</a>
+                            <a href="{{ url_for('electronica.get_electronica') }}" class="button">Electrónica</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,6 +42,10 @@
         display: block;
     }
 
+    .full-height {
+        min-height: 100vh;
+    }
+
     .button-container {
         display: flex;
         justify-content: center;
@@ -47,10 +53,16 @@
         margin-top: 20px;
     }
 
+    .btn-group-vertical {
+        display: flex;
+        flex-direction: column;
+    }
+
     .button {
         display: inline-block;
-        padding: 1em 2em;
-        font-size: 14px;
+        padding: 1.3em 3em;
+        margin: 0.5em 0;
+        font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 2.5px;
         font-weight: 500;
@@ -63,7 +75,9 @@
         cursor: pointer;
         outline: none;
         width: 100%;
+        max-width: 300px;
         text-decoration: none;
+        /* Para asegurar que el texto no se subraye */
     }
 
     .button:hover {
@@ -72,23 +86,12 @@
         color: #fff;
         transform: translateY(-7px);
         text-decoration: none;
+        /* Para asegurar que el texto no se subraye */
     }
 
-    h1, h2 {
+    h1,
+    h2 {
         color: #27a9c0;
-    }
-
-    @media (max-width: 768px) {
-        h1 {
-            font-size: 1.5rem;
-        }
-        h2 {
-            font-size: 1.2rem;
-        }
-        .button {
-            font-size: 12px;
-            padding: 0.8em 1.6em;
-        }
     }
 </style>
 {% endblock %}
