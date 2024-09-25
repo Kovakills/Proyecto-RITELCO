@@ -3,269 +3,298 @@
 {% block title %}Aceites{% endblock %}
 
 {% block content %}
+<div class="section">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Aceites</h1>
 
-<body>
-    <div class="section">
-        <div class="container mt-5">
-            <h1><center>Aceites</center></h1>
+        <div class="search-container mb-3">
+            <input type="text" id="search-input" class="form-style" placeholder="Buscar..." onkeyup="searchTable()">
+        </div>
 
-            <!-- Tabla de datos -->
-            <table class="table table-striped" id="aceite-table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tipo de Aceite</th>
-                        <th>Galones</th>
-                        <th>Estante ID</th>                        
-                        <th>
-                            <div class="d-flex justify-content-between align-items-center">
-                                Acciones
-                                <div id="poda" class="search-container">
-                                    <input type="text" id="search-input" class="form-style ml-2 input"
-                                        placeholder="Buscar..." onkeyup="searchTable()" style="width: 200px;">
-                                    <div class="filterBorder"></div>
-                                    <div class="input-mask"></div>
-                                    <div class="pink-mask"></div>
-                                </div>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for aceite in aceites %}
-                    <tr>
-                        <td>{{ aceite.nombre }}</td>
-                        <td>{{ aceite.tipo_de_aceite }}</td>
-                        <td>{{ aceite.cantidad }}</td>
-                        <td>{{ aceite.estante_id }}</td>                        
-
-                        <td>
-                            <div class="btn-group">
-                                <a href="{{ url_for('aceites.edit_aceites', id=aceite.id) }}"
-                                    class="edit-button">Edit</a>
-                                <form action="{{ url_for('aceites.delete_aceites', id=aceite.id) }}" method="post"
-                                    style="display:inline;">
-                                    <button type="submit" class="delete-button">
-                                        <svg class="svgIcon" viewBox="0 0 448 512">
-                                            <path
-                                                d="M135.2 17.7L128 32H32C14 32 0 46.3 0 64c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32 0-17.7-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32l21.2 339.2c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
-                                            </path>
-                                        </svg>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-            <!-- Botones debajo de la tabla -->
-            <div class="d-flex justify-content-between">
-                <a href="{{ url_for('planta.get_planta') }}" class="btn btn-secondary">Back</a>
-                <a href="{{ url_for('aceites.add_aceites') }}" class="btn-add" style="text-decoration: none;">Add
-                    Aceite</a>
+        <div class="table-container">
+            <div class="table-header">
+                <div class="header-cell">Nombre</div>
+                <div class="header-cell">Tipo de Aceite</div>
+                <div class="header-cell">Galones</div>
+                <div class="header-cell">Estante ID</div>
+                <div class="header-cell">Acciones</div>
+            </div>
+            <div class="table-body">
+                {% for aceite in aceites %}
+                <div class="table-row">
+                    <div class="table-cell">{{ aceite.nombre }}</div>
+                    <div class="table-cell">{{ aceite.tipo_de_aceite }}</div>
+                    <div class="table-cell">{{ aceite.cantidad }}</div>
+                    <div class="table-cell">{{ aceite.estante_id }}</div>
+                    <div class="table-cell">
+                        <div class="btn-group">
+                            <a href="{{ url_for('aceites.edit_aceites', id=aceite.id) }}"
+                                class="edit-button">Edit</a>
+                            <form action="{{ url_for('aceites.delete_aceites', id=aceite.id) }}" method="post"
+                                style="display:inline;">
+                                <button type="submit" class="delete-button">
+                                    <svg class="svgIcon" viewBox="0 0 448 512">
+                                        <path
+                                            d="M135.2 17.7L128 32H32C14 32 0 46.3 0 64c0 17.7 14.3 32 32 32H416c17.7 0 32-14.3 32-32 0-17.7-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32l21.2 339.2c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
+
+        <!-- Botones debajo de la tabla -->
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{{ url_for('planta.get_planta') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ url_for('aceites.add_aceites') }}" class="btn-add" style="text-decoration: none;">Add
+                Aceite</a>
+        </div>
     </div>
+</div>
 
-    <script>
-        // Función para buscar en la tabla
-        function searchTable() {
-            var input = document.getElementById("search-input");
-            var filter = input.value.toLowerCase();
-            var table = document.getElementById("aceite-table");
-            var rows = table.getElementsByTagName("tr");
+<script>
+    function searchTable() {
+        var input, filter, tableBody, rows, cells, i, j, txtValue;
+        input = document.getElementById("search-input");
+        filter = input.value.toUpperCase();
+        tableBody = document.querySelector(".table-body");
+        rows = tableBody.getElementsByClassName("table-row");
 
-            for (var i = 1; i < rows.length; i++) {
-                var cells = rows[i].getElementsByTagName("td");
-                var match = false;
-                for (var j = 0; j < cells.length - 1; j++) {
-                    if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
-                        match = true;
-                        break;
-                    }
-                }
-                if (match) {
-                    rows[i].style.display = "";
-                } else {
-                    rows[i].style.display = "none";
+        for (i = 0; i < rows.length; i++) {
+            cells = rows[i].getElementsByClassName("table-cell");
+            let rowMatch = false;
+            for (j = 0; j < cells.length - 1; j++) {
+                txtValue = cells[j].textContent || cells[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    rowMatch = true;
+                    break;
                 }
             }
+            if (rowMatch) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
         }
-    </script>
+    }
+</script>
 
-    <style>
-        /* Contenedor para los botones */
-        .btn-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        color: #27a9c0;
+        background-color: #1f2029;
+    }
 
-        /* Botón de eliminar */
-        .delete-button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgb(20, 20, 20);
-            border: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            position: relative;
-        }
+    .table-container {
+        background-color: #2a2b38;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
 
-        .delete-button .svgIcon {
-            width: 12px;
-            transition: width 0.3s ease;
-        }
+    .table-header {
+        display: flex;
+        background-color: #27a9c0;
+        color: #1f2029;
+        font-weight: bold;
+        padding: 15px;
+    }
 
-        .delete-button .svgIcon path {
-            fill: white;
-        }
+    .header-cell {
+        flex: 1;
+        text-align: left;
+    }
 
-        .delete-button:hover {
-            width: 100px;
-            border-radius: 50px;
-            background-color: rgb(255, 69, 69);
-        }
+    .table-body {
+        max-height: 400px;
+        overflow-y: auto;
+    }
 
-        .delete-button:hover .svgIcon {
-            width: 50px;
-            transform: translateY(60%);
-        }
+    .table-row {
+        display: flex;
+        border-bottom: 1px solid #3a3b4a;
+        transition: background-color 0.3s ease;
+    }
 
-        .delete-button::before {
-            position: absolute;
-            top: -20px;
-            content: "Delete";
-            color: white;
-            font-size: 2px;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
+    .table-row:hover {
+        background-color: #34353f;
+    }
 
-        .delete-button:hover::before {
-            font-size: 13px;
-            opacity: 1;
-            transform: translateY(30px);
-        }
+    .table-cell {
+        flex: 1;
+        padding: 15px;
+        text-align: left;
+    }
 
-        /* Botón de editar */
-        .edit-button {
-            width: 80px;
-            height: 40px;
-            border-radius: 10px;
-            background-color: rgb(20, 20, 20);
-            border: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            position: relative;
-        }
+    /* Estilos para el campo de búsqueda */
+    .search-container {
+        margin-bottom: 20px;
+    }
 
-        .edit-button:hover {
-            background-color: #27a9c0;
-            text-decoration: none;
-        }
+    .form-style {
+        width: 100%;
+        color: #27a9c0;
+        background-color: #2a2b38;
+        border: 2px solid #27a9c0;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
 
-        /* Posicionar el botón de eliminar al lado del botón de editar */
-        .delete-button {
-            margin-left: 10px;
-        }
+    .form-style:focus {
+        outline: none;
+        border-color: #ffffff;
+        box-shadow: 0 0 10px rgba(39, 169, 192, 0.5);
+    }
 
-        /* Otros estilos */
-        body {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 300;
-            line-height: 1.7;
-            color: #27a9c0;
-            background-color: #1f2029;
-        }
+    .form-style::placeholder {
+        color: #27a9c0;
+        opacity: 0.7;
+    }
 
-        table {
-            background-color: #494949;
-            border-collapse: collapse;
-        }
+    /* Mantener los estilos originales de los botones */
+    .btn-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-        th,
-        td {
-            border: 1px solid #5f5f5f;
-            padding: 10px;
-            text-align: left;
-        }
+    .delete-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: rgb(20, 20, 20);
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+    }
 
-        th {
-            background-color: #333;
-            color: #fff;
-        }
+    .delete-button .svgIcon {
+        width: 12px;
+        transition: width 0.3s ease;
+    }
 
-        td {
-            color: #ccc;
-        }
+    .delete-button .svgIcon path {
+        fill: white;
+    }
 
-        .btn-add {
-            --color: #27a9c0;
-            font-family: inherit;
-            display: inline-block;
-            width: 8em;
-            height: 2.6em;
-            line-height: 2.5em;
-            margin: 20px;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            border: 2px solid var(--color);
-            transition: color 0.5s;
-            z-index: 1;
-            font-size: 17px;
-            border-radius: 6px;
-            font-weight: 500;
-            color: var(--color);
-            text-align: center;
-            text-decoration: none;
-        }
+    .delete-button:hover {
+        width: 100px;
+        border-radius: 50px;
+        background-color: rgb(255, 69, 69);
+    }
 
-        .btn-add:before {
-            content: "";
-            position: absolute;
-            z-index: -1;
-            background: var(--color);
-            height: 150px;
-            width: 200px;
-            border-radius: 50%;
-        }
+    .delete-button:hover .svgIcon {
+        width: 50px;
+        transform: translateY(60%);
+    }
 
-        .btn-add:hover {
-            color: #ffffff;
-        }
+    .delete-button::before {
+        position: absolute;
+        top: -20px;
+        content: "Delete";
+        color: white;
+        font-size: 2px;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
 
-        .btn-add:before {
-            top: 100%;
-            left: 100%;
-            transition: all 0.7s;
-        }
+    .delete-button:hover::before {
+        font-size: 13px;
+        opacity: 1;
+        transform: translateY(30px);
+    }
 
-        .btn-add:hover:before {
-            top: -30px;
-            left: -30px;
-        }
+    .edit-button {
+        width: 80px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: rgb(20, 20, 20);
+        border: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+        color: #27a9c0;
+        text-decoration: none;
+    }
 
-        .btn-add:active:before {
-            background: #27a9c0;
-            transition: background 0s;
-        }
-    </style>
-</body>
+    .edit-button:hover {
+        background-color: #27a9c0;
+        color: #1f2029;
+        text-decoration: none;
+    }
+
+    .btn-add {
+        --color: #27a9c0;
+        font-family: inherit;
+        display: inline-block;
+        width: 8em;
+        height: 2.6em;
+        line-height: 2.5em;
+        margin: 20px;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        border: 2px solid var(--color);
+        transition: color 0.5s;
+        z-index: 1;
+        font-size: 17px;
+        border-radius: 6px;
+        font-weight: 500;
+        color: var(--color);
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-add:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: var(--color);
+        height: 150px;
+        width: 200px;
+        border-radius: 50%;
+    }
+
+    .btn-add:hover {
+        color: #ffffff;
+    }
+
+    .btn-add:before {
+        top: 100%;
+        left: 100%;
+        transition: all 0.7s;
+    }
+
+    .btn-add:hover:before {
+        top: -30px;
+        left: -30px;
+    }
+
+    .btn-add:active:before {
+        background: #27a9c0;
+        transition: background 0s;
+    }
+</style>
 {% endblock %}
