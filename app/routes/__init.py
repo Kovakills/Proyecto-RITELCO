@@ -2,7 +2,6 @@ from flask import blueprints
 
 from .aceites_routes import aceite_bp
 from .baja_tension_routes import baja_tension_bp
-from .electronica_routes import electronica_bp
 from .equipos_altura_routes import equipos_altura_bp
 from .equipos_media_tension_routes import equipos_media_tension_bp
 from .estante_routes import estante_bp
@@ -24,7 +23,6 @@ from routes import equipos_rescate_bp
 def register_blueprints(app):
     app.register_blueprint(aceite_bp, url_prefix='/aceites')
     app.register_blueprint(baja_tension_bp, url_prefix='/baja_tension')
-    app.register_blueprint(electronica_bp, url_prefix='/electronica')
     app.register_blueprint(equipos_altura_bp, url_prefix='/equipos_altura')
     app.register_blueprint(equipos_media_tension_bp, url_prefix='/equipos_media_tension')
     app.register_blueprint(estante_bp, url_prefix='/estante')

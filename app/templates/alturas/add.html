@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Add Equipos de altura{% endblock %}
+{% block title %}Add Equipos de Alturas{% endblock %}
 
 {% block content %}
 
@@ -19,8 +19,8 @@
         /* Estilo personalizado para los inputs */
         .inputbox {
             position: relative;
-            width: 100%; /* Para ocupar todo el ancho disponible */
-            margin-bottom: 20px; /* Separación entre los campos */
+            width: 100%; 
+            margin-bottom: 20px; 
         }
 
         .inputbox input {
@@ -36,7 +36,7 @@
             letter-spacing: 0.05em;
             transition: 0.5s;
             z-index: 10;
-            border-bottom: 2px solid #fff; /* Línea debajo del input */
+            border-bottom: 2px solid #fff;
         }
 
         .inputbox span {
@@ -107,16 +107,36 @@
     </style>
 
     <div class="container mt-5">
-        <h1><center>Add Equipos de altura</center></h1>
-        <form method="POST" action="{{ url_for('equipos_altura.add_equipos_altura') }}">
+        <h1><center>Add Equipos de Altura</center></h1>
+        <form method="POST" action="{{ url_for('equipos_alturas.add_equipos_alturas') }}">
             <div class="inputbox">
-                <input type="text" name="nombre" id="nombre" required>
-                <span>Nombre</span>
+                <input type="text" name="arnes" id="arnes" required>
+                <span>Arnés</span>
                 <i></i>
             </div>
             <div class="inputbox">
-                <input type="text" name="descripcion_producto" id="descripcion_producto" required>
-                <span>Descripcion del producto</span>
+                <input type="text" name="eslingas" id="eslingas" required>
+                <span>Eslingas</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="posicionamiento" id="posicionamiento" required>
+                <span>Posicionamiento</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="caida_en_y" id="caida_en_y" required>
+                <span>Caída en Y</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="text" name="conectores" id="conectores" required>
+                <span>Conectores</span>
+                <i></i>
+            </div>
+            <div class="inputbox">
+                <input type="number" name="cantidad" id="cantidad" min="1" value="1" required>
+                <span>Cantidad</span>
                 <i></i>
             </div>
             <div class="form-group mt-2">

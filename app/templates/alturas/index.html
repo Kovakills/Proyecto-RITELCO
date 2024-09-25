@@ -10,8 +10,12 @@
     <table class="table table-striped" id="equipos_altura-table">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Descripcion del producto</th>
+                <th>Arnes</th>
+                <th>Eslingas</th>
+                <th>posicionamiento</th>
+                <th>caida en Y</th>
+                <th>Conectores</th>
+                <th>Cantidad</th>
                 <th>Estante ID</th>
                 <th>
                     <div class="d-flex justify-content-between align-items-center">
@@ -23,17 +27,21 @@
             </tr>
         </thead>
         <tbody>
-            {% for equipos_altura in data %}
+            {% for equipos_alturas in data %}
             <tr>
-                <td>{{ equipos_altura.nombre }}</td>
-                <td>{{ equipos_altura.descripcion_producto }}</td>
-                <td>{{ equipos_altura.estante_id }}</td>
+                <td>{{ equipos_alturas.arnes }}</td>
+                <td>{{ equipos_alturas.eslingas }}</td>
+                <td>{{ equipos_alturas.posicionamiento }}</td>
+                <td>{{ equipos_alturas.caida_en_y }}</td>
+                <td>{{ equipos_alturas.conectores }}</td>
+                <td>{{ equipos_alturas.cantidad }}</td>
+                <td>{{ equipos_alturas.estante_id }}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{ url_for('equipos_altura.edit_equipos_altura', idequiposaltura=equipos_altura.idequiposaltura) }}"
+                        <a href="{{ url_for('equipos_alturas.edit_equipos_alturas', idequiposaltura=equipos_alturas.idequiposaltura) }}"
                             class="edit-button">Edit</a>
                         <form
-                            action="{{ url_for('equipos_altura.delete_equipos_altura', idequiposaltura=equipos_altura.idequiposaltura) }}"
+                            action="{{ url_for('equipos_alturas.delete_equipos_alturas', idequiposaltura=equipos_alturas.idequiposaltura) }}"
                             method="post" style="display:inline;">
                             <button type="submit" class="delete-button">
                                 <svg class="svgIcon" viewBox="0 0 448 512">
@@ -53,7 +61,7 @@
     <!-- Botón de agregar debajo de la tabla -->
     <div class="d-flex justify-content-between">
         <a href="{{ url_for('equipos.get_spt') }}" class="btn btn-secondary">Back</a>
-        <a href="{{ url_for('equipos_altura.add_equipos_altura') }}" class="btn-add" style="text-decoration: none;">Add
+        <a href="{{ url_for('equipos_alturas.add_equipos_alturas') }}" class="btn-add" style="text-decoration: none;">Add
             Equipo</a>
     </div>
 </div>

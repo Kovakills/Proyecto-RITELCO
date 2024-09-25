@@ -28,7 +28,7 @@ def create_app():
     from app.routes import (
         aceites_routes, equipos_altura_routes, sistema_pt_routes,
         baja_tension_routes, equipos_media_tension_routes,
-        estante_routes, electronica_routes, herramientas_electricas_routes,
+        estante_routes, herramientas_electricas_routes,
         herramientas_inalambricas_routes, respels_routes,
         filtros_routes, auth_routes, planta_routes, herramientas_routes, spt_routes, page_routes, equipos_routes, equipos_rescate_routes
     )
@@ -39,7 +39,6 @@ def create_app():
     app.register_blueprint(baja_tension_routes.bp)
     app.register_blueprint(equipos_media_tension_routes.bp)
     app.register_blueprint(estante_routes.bp)
-    app.register_blueprint(electronica_routes.bp)
     app.register_blueprint(herramientas_electricas_routes.bp)
     app.register_blueprint(herramientas_inalambricas_routes.bp)
     app.register_blueprint(respels_routes.bp)

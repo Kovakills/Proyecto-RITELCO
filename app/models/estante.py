@@ -9,7 +9,6 @@ class Estantes(db.Model):
     herramientas_electricas = db.relationship('HerramientasElectricas', back_populates='estante')
     herramientas_inalambricas = db.relationship('HerramientasInalambricas', back_populates='estante')
     respels = db.relationship('Respels', back_populates='estante')
-    electronica = db.relationship('Electronica', back_populates='estante')
     baja_tension = db.relationship('BajaTension', back_populates='estante')
     equipos_media_tension = db.relationship('EquiposMediaTension', back_populates='estante')
     filtros = db.relationship('Filtros', back_populates='estante')
