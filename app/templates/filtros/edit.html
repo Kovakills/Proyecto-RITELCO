@@ -21,7 +21,9 @@
             margin-bottom: 20px;
         }
 
-        .inputbox input, .inputbox select, .inputbox textarea {
+        .inputbox input,
+        .inputbox select,
+        .inputbox textarea {
             position: relative;
             width: 100%;
             padding: 20px 10px 10px;
@@ -52,11 +54,11 @@
             pointer-events: none;
         }
 
-        .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span,
-        .inputbox textarea:valid ~ span,
-        .inputbox textarea:focus ~ span,
-        .inputbox select:focus ~ span {
+        .inputbox input:valid~span,
+        .inputbox input:focus~span,
+        .inputbox textarea:valid~span,
+        .inputbox textarea:focus~span,
+        .inputbox select:focus~span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -75,11 +77,11 @@
             z-index: 9;
         }
 
-        .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i,
-        .inputbox textarea:valid ~ i,
-        .inputbox textarea:focus ~ i,
-        .inputbox select:focus ~ i {
+        .inputbox input:valid~i,
+        .inputbox input:focus~i,
+        .inputbox textarea:valid~i,
+        .inputbox textarea:focus~i,
+        .inputbox select:focus~i {
             height: 44px;
         }
 
@@ -115,7 +117,9 @@
 
     <div class="section">
         <div class="container mt-5">
-            <h1><center>Editar Filtro</center></h1>
+            <h1>
+                <center>Editar Filtro</center>
+            </h1>
             <form method="POST" action="{{ url_for('filtros.edit_filtros', id=filtros.id) }}">
                 <div class="inputbox">
                     <input type="text" name="marca" id="marca" value="{{ filtros.marca }}" required>
@@ -123,7 +127,8 @@
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input type="text" name="tipo_de_filtro" id="tipo_de_filtro" value="{{ filtros.tipo_de_filtro }}" required>
+                    <input type="text" name="tipo_de_filtro" id="tipo_de_filtro" value="{{ filtros.tipo_de_filtro }}"
+                        required>
                     <span>Tipo de filtro</span>
                     <i></i>
                 </div>
@@ -139,14 +144,16 @@
                 </div>
                 <div class="form-group mt-2">
                     <label for="observacion">Observaciones</label>
-                    <input type="text" name="observacion" id="observacion" value="{{ filtros.observacion }}" class="form-control">
+                    <input type="text" name="observacion" id="observacion" value="{{ filtros.observacion }}"
+                        class="form-control">
                 </div>
                 <div class="form-group mt-2">
                     <label for="estante_id">Estante</label>
                     <select id="estante_id" name="estante_id" required class="form-control">
                         <option value="" disabled>Selecciona un estante</option>
                         {% for estante in estantes %}
-                        <option value="{{ estante.id_estante }}" {% if estante.id_estante == filtros.estante_id %}selected{% endif %}>{{ estante.nombre }}</option>
+                        <option value="{{ estante.id_estante }}" {% if estante.id_estante==filtros.estante_id
+                            %}selected{% endif %}>{{ estante.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>

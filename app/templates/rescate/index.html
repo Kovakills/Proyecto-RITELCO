@@ -35,8 +35,9 @@
                         <div class="btn-group">
                             <a href="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipo_rescate.idequiposrescate) }}"
                                 class="edit-button">Edit</a>
-                            <form action="{{ url_for('equipos_rescate.delete_equipos_rescate', idequiposrescate=equipo_rescate.idequiposrescate) }}" 
-                                  method="post" style="display:inline;">
+                            <form
+                                action="{{ url_for('equipos_rescate.delete_equipos_rescate', idequiposrescate=equipo_rescate.idequiposrescate) }}"
+                                method="post" style="display:inline;">
                                 <button type="submit" class="delete-button">
                                     <svg class="svgIcon" viewBox="0 0 448 512">
                                         <path
@@ -54,7 +55,8 @@
         <!-- Botón de agregar debajo de la tabla -->
         <div class="d-flex justify-content-between mt-4">
             <a href="{{ url_for('equipos.get_spt') }}" class="btn btn-secondary">Back</a>
-            <a href="{{ url_for('equipos_rescate.add_equipos_rescate') }}" class="btn-add" style="text-decoration: none;">Add Equipo</a>
+            <a href="{{ url_for('equipos_rescate.add_equipos_rescate') }}" class="btn-add"
+                style="text-decoration: none;">Add Equipo</a>
         </div>
     </div>
 </div>

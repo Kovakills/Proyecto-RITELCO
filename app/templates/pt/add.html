@@ -21,7 +21,8 @@
             margin-bottom: 20px;
         }
 
-        .inputbox input, .inputbox select {
+        .inputbox input,
+        .inputbox select {
             position: relative;
             width: 100%;
             padding: 20px 10px 10px;
@@ -47,9 +48,9 @@
             pointer-events: none;
         }
 
-        .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span,
-        .inputbox select:focus ~ span {
+        .inputbox input:valid~span,
+        .inputbox input:focus~span,
+        .inputbox select:focus~span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -68,9 +69,9 @@
             z-index: 9;
         }
 
-        .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i,
-        .inputbox select:focus ~ i {
+        .inputbox input:valid~i,
+        .inputbox input:focus~i,
+        .inputbox select:focus~i {
             height: 44px;
         }
 
@@ -105,7 +106,9 @@
     </style>
 
     <div class="container mt-5">
-        <h1><center>Add Sistema puesta a tierra</center></h1>
+        <h1>
+            <center>Add Sistema puesta a tierra</center>
+        </h1>
         <form method="POST" action="{{ url_for('sistema_pt.add_sistema_pt') }}">
             <div class="inputbox">
                 <input type="text" name="unidad_medida" id="unidad_medida" required>

@@ -3,6 +3,7 @@
 {% block title %}Add Aceite{% endblock %}
 
 {% block content %}
+
 <body>
     <style>
         body {
@@ -16,8 +17,10 @@
         /* Estilo personalizado para los inputs */
         .inputbox {
             position: relative;
-            width: 100%; /* Ajustado para que los inputs ocupen todo el ancho disponible */
-            margin-bottom: 20px; /* Espacio entre los campos */
+            width: 100%;
+            /* Ajustado para que los inputs ocupen todo el ancho disponible */
+            margin-bottom: 20px;
+            /* Espacio entre los campos */
         }
 
         .inputbox input {
@@ -28,7 +31,8 @@
             outline: none;
             box-shadow: none;
             border: none;
-            color: #ffffff; /* Cambiado a blanco para el texto */
+            color: #ffffff;
+            /* Cambiado a blanco para el texto */
             font-size: 1em;
             letter-spacing: 0.05em;
             transition: 0.5s;
@@ -46,8 +50,8 @@
             pointer-events: none;
         }
 
-        .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span {
+        .inputbox input:valid~span,
+        .inputbox input:focus~span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -66,8 +70,8 @@
             z-index: 9;
         }
 
-        .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i {
+        .inputbox input:valid~i,
+        .inputbox input:focus~i {
             height: 44px;
         }
 
@@ -102,7 +106,9 @@
     </style>
     <div class="section">
         <div class="container mt-5">
-            <h1><center>Add Aceite</center></h1>
+            <h1>
+                <center>Add Aceite</center>
+            </h1>
             <form method="POST" action="{{ url_for('aceites.add_aceites') }}">
                 <div class="inputbox">
                     <input type="text" name="nombre" id="nombre" required>

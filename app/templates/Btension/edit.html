@@ -48,9 +48,9 @@
             pointer-events: none;
         }
 
-        .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span,
-        .inputbox select:focus ~ span {
+        .inputbox input:valid~span,
+        .inputbox input:focus~span,
+        .inputbox select:focus~span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -69,9 +69,9 @@
             z-index: 9;
         }
 
-        .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i,
-        .inputbox select:focus ~ i {
+        .inputbox input:valid~i,
+        .inputbox input:focus~i,
+        .inputbox select:focus~i {
             height: 44px;
         }
 
@@ -106,15 +106,20 @@
     </style>
 
     <div class="container mt-5">
-        <h1><center>Edit Sistema puesta a tierra</center></h1>
-        <form method="POST" action="{{ url_for('baja_tension.edit_bajatension', idbajatension=baja_tension.idbajatension) }}">
+        <h1>
+            <center>Edit Sistema puesta a tierra</center>
+        </h1>
+        <form method="POST"
+            action="{{ url_for('baja_tension.edit_bajatension', idbajatension=baja_tension.idbajatension) }}">
             <div class="inputbox">
-                <input type="text" name="unidad_medida" id="unidad_medida" value="{{ baja_tension.unidad_medida }}" required>
+                <input type="text" name="unidad_medida" id="unidad_medida" value="{{ baja_tension.unidad_medida }}"
+                    required>
                 <span>Unidad de medida</span>
                 <i></i>
             </div>
             <div class="inputbox">
-                <input type="text" name="descripcion_producto" id="descripcion_producto" value="{{ baja_tension.descripcion_producto }}" required>
+                <input type="text" name="descripcion_producto" id="descripcion_producto"
+                    value="{{ baja_tension.descripcion_producto }}" required>
                 <span>Descripcion del producto</span>
                 <i></i>
             </div>
@@ -125,14 +130,16 @@
             </div>
             <div class="form-group mt-2">
                 <label for="observacion">Observaciones</label>
-                <input type="text" name="observacion" id="observacion" value="{{ baja_tension.observacion }}" class="form-control">
+                <input type="text" name="observacion" id="observacion" value="{{ baja_tension.observacion }}"
+                    class="form-control">
             </div>
             <div class="form-group mt-2">
                 <label for="estante_id">Estante</label>
                 <select id="estante_id" name="estante_id" required class="form-control">
                     <option value="" disabled>Selecciona un estante</option>
                     {% for estante in estantes %}
-                    <option value="{{ estante.id_estante }}" {% if estante.id_estante == baja_tension.estante_id %}selected{% endif %}>{{ estante.nombre }}</option>
+                    <option value="{{ estante.id_estante }}" {% if estante.id_estante==baja_tension.estante_id
+                        %}selected{% endif %}>{{ estante.nombre }}</option>
                     {% endfor %}
                 </select>
             </div>

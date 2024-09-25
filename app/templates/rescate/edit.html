@@ -21,7 +21,9 @@
             margin-bottom: 20px;
         }
 
-        .inputbox input, .inputbox select, .inputbox textarea {
+        .inputbox input,
+        .inputbox select,
+        .inputbox textarea {
             position: relative;
             width: 100%;
             padding: 20px 10px 10px;
@@ -52,11 +54,11 @@
             pointer-events: none;
         }
 
-        .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span,
-        .inputbox textarea:valid ~ span,
-        .inputbox textarea:focus ~ span,
-        .inputbox select:focus ~ span {
+        .inputbox input:valid~span,
+        .inputbox input:focus~span,
+        .inputbox textarea:valid~span,
+        .inputbox textarea:focus~span,
+        .inputbox select:focus~span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -75,11 +77,11 @@
             z-index: 9;
         }
 
-        .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i,
-        .inputbox textarea:valid ~ i,
-        .inputbox textarea:focus ~ i,
-        .inputbox select:focus ~ i {
+        .inputbox input:valid~i,
+        .inputbox input:focus~i,
+        .inputbox textarea:valid~i,
+        .inputbox textarea:focus~i,
+        .inputbox select:focus~i {
             height: 44px;
         }
 
@@ -114,8 +116,11 @@
     </style>
 
     <div class="container mt-5">
-        <h1><center>Edit Equipo de Rescate</center></h1>
-        <form method="POST" action="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}">
+        <h1>
+            <center>Edit Equipo de Rescate</center>
+        </h1>
+        <form method="POST"
+            action="{{ url_for('equipos_rescate.edit_equipos_rescate', idequiposrescate=equipos_rescate.idequiposrescate) }}">
             <div class="inputbox">
                 <input type="text" name="arnes" id="arnes" value="{{ equipos_rescate.arnes }}" required>
                 <span>Arnés</span>
@@ -127,7 +132,8 @@
                 <i></i>
             </div>
             <div class="inputbox">
-                <input type="text" name="posicionamiento" id="posicionamiento" value="{{ equipos_rescate.posicionamiento }}" required>
+                <input type="text" name="posicionamiento" id="posicionamiento"
+                    value="{{ equipos_rescate.posicionamiento }}" required>
                 <span>Posicionamiento</span>
                 <i></i>
             </div>
@@ -142,7 +148,8 @@
                 <i></i>
             </div>
             <div class="inputbox">
-                <input type="number" name="cantidad" id="cantidad" value="{{ equipos_rescate.cantidad }}" min="1" required>
+                <input type="number" name="cantidad" id="cantidad" value="{{ equipos_rescate.cantidad }}" min="1"
+                    required>
                 <span>Cantidad</span>
                 <i></i>
             </div>
@@ -151,7 +158,8 @@
                 <select id="estante_id" name="estante_id" required class="form-control">
                     <option value="" disabled>Selecciona un estante</option>
                     {% for estante in estantes %}
-                    <option value="{{ estante.id_estante }}" {% if estante.id_estante == equipos_rescate.estante_id %}selected{% endif %}>{{ estante.nombre }}</option>
+                    <option value="{{ estante.id_estante }}" {% if estante.id_estante==equipos_rescate.estante_id
+                        %}selected{% endif %}>{{ estante.nombre }}</option>
                     {% endfor %}
                 </select>
             </div>

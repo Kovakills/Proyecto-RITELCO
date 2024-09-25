@@ -28,8 +28,7 @@
                     <div class="table-cell">{{ aceite.estante_id }}</div>
                     <div class="table-cell">
                         <div class="btn-group">
-                            <a href="{{ url_for('aceites.edit_aceites', id=aceite.id) }}"
-                                class="edit-button">Edit</a>
+                            <a href="{{ url_for('aceites.edit_aceites', id=aceite.id) }}" class="edit-button">Edit</a>
                             <form action="{{ url_for('aceites.delete_aceites', id=aceite.id) }}" method="post"
                                 style="display:inline;">
                                 <button type="submit" class="delete-button">

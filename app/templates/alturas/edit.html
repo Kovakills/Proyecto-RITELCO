@@ -21,7 +21,9 @@
             margin-bottom: 20px;
         }
 
-        .inputbox input, .inputbox select, .inputbox textarea {
+        .inputbox input,
+        .inputbox select,
+        .inputbox textarea {
             position: relative;
             width: 100%;
             padding: 20px 10px 10px;
@@ -52,11 +54,11 @@
             pointer-events: none;
         }
 
-        .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span,
-        .inputbox textarea:valid ~ span,
-        .inputbox textarea:focus ~ span,
-        .inputbox select:focus ~ span {
+        .inputbox input:valid~span,
+        .inputbox input:focus~span,
+        .inputbox textarea:valid~span,
+        .inputbox textarea:focus~span,
+        .inputbox select:focus~span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -75,11 +77,11 @@
             z-index: 9;
         }
 
-        .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i,
-        .inputbox textarea:valid ~ i,
-        .inputbox textarea:focus ~ i,
-        .inputbox select:focus ~ i {
+        .inputbox input:valid~i,
+        .inputbox input:focus~i,
+        .inputbox textarea:valid~i,
+        .inputbox textarea:focus~i,
+        .inputbox select:focus~i {
             height: 44px;
         }
 
@@ -115,8 +117,11 @@
 
     <div class="section">
         <div class="container mt-5">
-            <h1><center>Edit Equipo de alturas</center></h1>
-            <form method="POST" action="{{ url_for('equipos_alturas.edit_equipos_alturas', idequiposaltura=equipos_alturas.idequiposaltura) }}">
+            <h1>
+                <center>Edit Equipo de alturas</center>
+            </h1>
+            <form method="POST"
+                action="{{ url_for('equipos_alturas.edit_equipos_alturas', idequiposaltura=equipos_alturas.idequiposaltura) }}">
                 <div class="inputbox">
                     <input type="text" name="arnes" id="arnes" value="{{ equipos_alturas.arnes }}" required>
                     <span>Arnés</span>
@@ -128,22 +133,26 @@
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input type="text" name="posicionamiento" id="posicionamiento" value="{{ equipos_alturas.posicionamiento }}" required>
+                    <input type="text" name="posicionamiento" id="posicionamiento"
+                        value="{{ equipos_alturas.posicionamiento }}" required>
                     <span>Posicionamiento</span>
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input type="text" name="caida_en_y" id="caida_en_y" value="{{ equipos_alturas.caida_en_y }}" required>
+                    <input type="text" name="caida_en_y" id="caida_en_y" value="{{ equipos_alturas.caida_en_y }}"
+                        required>
                     <span>Caída en Y</span>
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input type="text" name="conectores" id="conectores" value="{{ equipos_alturas.conectores }}" required>
+                    <input type="text" name="conectores" id="conectores" value="{{ equipos_alturas.conectores }}"
+                        required>
                     <span>Conectores</span>
                     <i></i>
                 </div>
                 <div class="inputbox">
-                    <input type="number" name="cantidad" id="cantidad" value="{{ equipos_alturas.cantidad }}" min="1" required>
+                    <input type="number" name="cantidad" id="cantidad" value="{{ equipos_alturas.cantidad }}" min="1"
+                        required>
                     <span>Cantidad</span>
                     <i></i>
                 </div>
@@ -152,12 +161,14 @@
                     <select id="estante_id" name="estante_id" required class="form-control">
                         <option value="" disabled>Selecciona un estante</option>
                         {% for estante in estantes %}
-                        <option value="{{ estante.id_estante }}" {% if estante.id_estante == equipos_alturas.estante_id %}selected{% endif %}>{{ estante.nombre }}</option>
+                        <option value="{{ estante.id_estante }}" {% if estante.id_estante==equipos_alturas.estante_id
+                            %}selected{% endif %}>{{ estante.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
-                <a href="{{ url_for('equipos_alturas.get_equipos_alturas') }}" class="btn btn-secondary mt-3">Cancelar</a>
+                <a href="{{ url_for('equipos_alturas.get_equipos_alturas') }}"
+                    class="btn btn-secondary mt-3">Cancelar</a>
             </form>
         </div>
     </div>
