@@ -14,15 +14,13 @@
             background-color: #1f2029;
         }
 
-        /* Estilo personalizado para los inputs */
         .inputbox {
             position: relative;
             width: 100%;
             margin-bottom: 20px;
         }
 
-        .inputbox input,
-        .inputbox select {
+        .inputbox input {
             position: relative;
             width: 100%;
             padding: 20px 10px 10px;
@@ -49,8 +47,7 @@
         }
 
         .inputbox input:valid~span,
-        .inputbox input:focus~span,
-        .inputbox select:focus~span {
+        .inputbox input:focus~span {
             color: #27a9c0;
             transform: translateX(-10px) translateY(-34px);
             font-size: 0.75em;
@@ -70,8 +67,7 @@
         }
 
         .inputbox input:valid~i,
-        .inputbox input:focus~i,
-        .inputbox select:focus~i {
+        .inputbox input:focus~i {
             height: 44px;
         }
 
@@ -129,52 +125,119 @@
         .btn-back svg {
             margin-right: 8px;
         }
+
+        /* Estilo minimalista para el selector de estante */
+.select-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.select-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1em;
+    background-color: rgba(42, 43, 56, 0.8);
+    border: 2px solid #27a9c0;
+    border-radius: 12px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.select-container select:focus {
+    outline: none;
+    border-color: #3ac7de;
+    box-shadow: 0 0 0 3px rgba(39, 169, 192, 0.3);
+    background-color: rgba(42, 43, 56, 1);
+}
+
+.select-container::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #27a9c0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.select-container:hover::after {
+    color: #3ac7de;
+}
+
+.select-container select option {
+    background-color: #2a2b38;
+    color: #ffffff;
+}
+
+.select-label {
+    position: absolute;
+    top: -14px;
+    left: 15px;
+    background-color: #1f2029;
+    padding: 0 10px;
+    font-size: 0.85em;
+    color: #27a9c0;
+    transition: all 0.3s ease;
+}
+
+.select-container select:focus + .select-label,
+.select-container select:valid + .select-label {
+    color: #3ac7de;
+    transform: translateY(-5px);
+}
     </style>
 
-    <div class="container mt-5">
-        <h1>
-            <center>Add Equipo de baja tension</center>
-        </h1>
-        <form method="POST" action="{{ url_for('baja_tension.add_baja_tension') }}">
-            <div class="inputbox">
-                <input type="text" name="unidad_medida" id="unidad_medida" required>
-                <span>Unidad de medida</span>
-                <i></i>
-            </div>
-            <div class="inputbox">
-                <input type="text" name="descripcion_producto" id="descripcion_producto" required>
-                <span>Descripcion del producto</span>
-                <i></i>
-            </div>
-            <div class="inputbox mt-2">
-                <input type="number" name="cantidad" id="cantidad" value="" min="" required>
-                <span>Cantidad</span>
-                <i></i>
-            </div>
-            <div class="form-group mt-2">
-                <label for="observacion">Observaciones</label>
-                <input type="text" name="observacion" id="observacion" class="form-control">
-            </div>
-            <div class="form-group mt-2">
-                <label for="estante_id">Estante</label>
-                <select id="estante_id" name="estante_id" required class="form-control">
-                    <option value="" disabled selected>Selecciona un estante</option>
-                    {% for estante in estantes %}
-                    <option value="{{ estante.id_estante }}">{{ estante.nombre }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="d-flex justify-content-between mt-4">
-                <a  class="btn-back"onclick="window.history.back();">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
-                        <line x1="19" y1="12" x2="5" y2="12"></line>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
-                    Back
-                </a>
-                <button type="submit" class="btn-add">Add</button>
-            </div>
-        </form>
-    </div>
+<div class="container mt-5">
+    <h1>
+        <center>Add Equipo de Baja Tensión</center>
+    </h1>
+    <form method="POST" action="{{ url_for('baja_tension.add_baja_tension') }}">
+        <div class="inputbox">
+            <input type="text" name="unidad_medida" id="unidad_medida" required>
+            <span>Unidad de Medida</span>
+            <i></i>
+        </div>
+        <div class="inputbox">
+            <input type="text" name="descripcion_producto" id="descripcion_producto" required>
+            <span>Descripción del Producto</span>
+            <i></i>
+        </div>
+        <div class="inputbox mt-2">
+            <input type="number" name="cantidad" id="cantidad" value="" min="1" required>
+            <span>Cantidad</span>
+            <i></i>
+        </div>
+        <div class="inputbox">
+            <input type="text" name="observacion" id="observacion">
+            <span>Observaciones</span>
+            <i></i>
+        </div>
+        <div class="select-container">
+            <select id="estante_id" name="estante_id" required>
+                <option value="" disabled selected>Selecciona un Estante</option>
+                {% for estante in estantes %}
+                <option value="{{ estante.id_estante }}">{{ estante.nombre }}</option>
+                {% endfor %}
+            </select>
+            <label for="estante_id" class="select-label">Estante</label>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <a class="btn-back" onclick="window.history.back();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back
+            </a>
+            <button type="submit" class="btn-add">Add</button>
+        </div>
+    </form>
+</div>
 </body>
 {% endblock %}
