@@ -72,66 +72,59 @@
             height: 44px;
         }
 
-        /* Estilo para los botones */
-        .btn-primary {
-            background-color: #27a9c0;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: lightblue;
-        }
-
-        .btn-secondary {
-            background-color: #444;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #666;
-        }
-
-        .inputbox1 {
+        .btn-add, .btn-back {
+            --color: #27a9c0;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 8em;
+            height: 2.6em;
+            line-height: 2.5em;
+            margin: 20px;
             position: relative;
-            width: 100%;
-            margin-bottom: 20px;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid var(--color);
+            transition: color 0.5s;
+            z-index: 1;
+            font-size: 17px;
+            border-radius: 6px;
+            font-weight: 500;
+            color: var(--color);
+            background-color: transparent;
+            text-decoration: none;
         }
 
-        .inputbox1 span {
+        .btn-add:before, .btn-back:before {
+            content: "";
             position: absolute;
-            top: -20px;
-            left: 0;
-            font-size: 0.85em;
-            color: #27a9c0;
-            padding: 0 5px;
-            background-color: #1f2029;
+            z-index: -1;
+            background: var(--color);
+            height: 150px;
+            width: 200px;
+            border-radius: 50%;
+            top: 100%;
+            left: 100%;
+            transition: all 0.7s;
         }
 
-        .inputbox1 input[type="date"] {
-            width: 15%;
-            padding: 15px 10px;
-            background: #2a2b38;
-            border: 1px solid #444;
-            border-radius: 5px;
-            color: #fff;
-            font-size: 1em;
-            outline: none;
-            transition: 0.3s;
+        .btn-add:hover, .btn-back:hover {
+            color: #ffffff;
         }
 
-        .inputbox1 input[type="date"]:focus {
-            border-color: #27a9c0;
-            background: #1f2029;
+        .btn-add:hover:before, .btn-back:hover:before {
+            top: -30px;
+            left: -30px;
+        }
+
+        .btn-add:active:before, .btn-back:active:before {
+            background: #27a9c0;
+            transition: background 0s;
+        }
+
+        .btn-back svg {
+            margin-right: 8px;
         }
     </style>
 
@@ -178,8 +171,16 @@
                     {% endfor %}
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Add</button>
-            <button type="button" class="btn btn-secondary mt-3" onclick="window.history.back();">Back</button>
+            <div class="d-flex justify-content-between mt-4">
+                <a  class="btn-back"onclick="window.history.back();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    Back
+                </a>
+                <button type="submit" class="btn-add">Add</button>
+            </div>
         </form>
     </div>
 </body>
