@@ -56,10 +56,17 @@
 
         <!-- Botones debajo de la tabla -->
         <div class="d-flex justify-content-between mt-4">
-            <a href="{{ url_for('equipos.get_spt') }}" class="btn btn-secondary">Back</a>
+            <a href="{{ url_for('equipos.get_spt') }}" class="btn-back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-arrow-left">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back
+            </a>
             <a href="{{ url_for('equipos_alturas.add_equipos_alturas') }}" class="btn-add"
-                style="text-decoration: none;">Add
-                Equipo</a>
+                style="text-decoration: none;">Add Equipo</a>
         </div>
     </div>
 </div>
@@ -303,6 +310,59 @@
     .btn-add:active:before {
         background: #27a9c0;
         transition: background 0s;
+    }
+    .btn-back {
+        --color: #27a9c0;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 6em;
+        height: 2.6em;
+        line-height: 2.5em;
+        margin: 20px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid var(--color);
+        transition: color 0.5s;
+        z-index: 1;
+        font-size: 17px;
+        border-radius: 6px;
+        font-weight: 500;
+        color: var(--color);
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    .btn-back:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background: var(--color);
+        height: 150px;
+        width: 200px;
+        border-radius: 50%;
+        top: 100%;
+        left: 100%;
+        transition: all 0.7s;
+    }
+
+    .btn-back:hover {
+        color: #ffffff;
+    }
+
+    .btn-back:hover:before {
+        top: -30px;
+        left: -30px;
+    }
+
+    .btn-back:active:before {
+        background: #27a9c0;
+        transition: background 0s;
+    }
+
+    .btn-back svg {
+        margin-right: 8px;
     }
 </style>
 {% endblock %}
