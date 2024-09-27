@@ -16,6 +16,7 @@ from routes import spt_bp
 from routes import page_bp
 from routes import equipos_bp
 from routes import equipos_rescate_bp
+from routes import historial_bp
 
 
 
@@ -37,6 +38,7 @@ def register_blueprints(app):
     app.register_blueprint(page_bp)
     app.register_blueprint(equipos_bp)
     app.register_blueprint(equipos_rescate_bp)
+    app.register_blueprint(historial_bp)
 
     
 

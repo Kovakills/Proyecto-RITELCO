@@ -30,7 +30,8 @@ def create_app():
         baja_tension_routes, equipos_media_tension_routes,
         estante_routes, herramientas_electricas_routes,
         herramientas_inalambricas_routes, respels_routes,
-        filtros_routes, auth_routes, planta_routes, herramientas_routes, spt_routes, page_routes, equipos_routes, equipos_rescate_routes
+        filtros_routes, auth_routes, planta_routes, herramientas_routes, spt_routes, page_routes, equipos_routes, equipos_rescate_routes,
+        historial_routes
     )
 
     app.register_blueprint(aceites_routes.bp)
@@ -50,6 +51,7 @@ def create_app():
     app.register_blueprint(page_routes.bp)
     app.register_blueprint(equipos_routes.bp)
     app.register_blueprint(equipos_rescate_routes.bp)
+    app.register_blueprint(historial_routes.bp)
 
     with app.app_context():
         db.create_all()
