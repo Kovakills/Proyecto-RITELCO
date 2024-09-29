@@ -24,7 +24,7 @@
                     {% for registro in historial %}
                     <tr>
                         <td>{{ registro.usuario.username }}</td>
-                        <td>{{ registro.accion }}</td>
+                        <td>{{ registro.accion }}</td>  <!-- Acción con toda la información -->
                         <td>{{ registro.tabla }}</td>
                         <td>{{ registro.registro_id }}</td>
                         <td>{{ registro.fecha.strftime('%Y-%m-%d %H:%M:%S') }}</td>

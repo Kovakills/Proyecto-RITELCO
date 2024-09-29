@@ -1,8 +1,10 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
-from flask_login import login_required
+from flask_login import login_required, current_user
 from ..models.equipos_rescate import EquiposRescate
 from ..models.estante import Estantes
+from ..models.historial import Historial
 from .. import db
+from datetime import datetime
 
 bp = Blueprint('equipos_rescate', __name__)
 
@@ -43,6 +45,17 @@ def add_equipos_rescate():
         )
         db.session.add(new_equipo)
         db.session.commit()
+
+        # Registro en el historial
+        nuevo_historial = Historial(
+            usuario_id=current_user.id,
+            tabla="EquiposRescate",
+            accion=f"Agregó equipo de rescate: Arnes: {arnes}, Eslingas: {eslingas}, Posicionamiento: {posicionamiento}, Caída en Y: {caida_en_y}, Conectores: {conectores}, Cantidad: {cantidad}, Estante ID: {estante_id}",
+            fecha=datetime.utcnow()
+        )
+        db.session.add(nuevo_historial)
+        db.session.commit()
+
         flash('Equipo de rescate agregado exitosamente', 'success')
         return redirect(url_for('equipos_rescate.get_equipos_rescate'))
     
@@ -56,6 +69,9 @@ def edit_equipos_rescate(idequiposrescate):
     equipos_rescate = EquiposRescate.query.get_or_404(idequiposrescate)
 
     if request.method == 'POST':
+        # Guardamos los datos antiguos para registrar cambios
+        datos_anteriores = f"Arnes: {equipos_rescate.arnes}, Eslingas: {equipos_rescate.eslingas}, Posicionamiento: {equipos_rescate.posicionamiento}, Caída en Y: {equipos_rescate.caida_en_y}, Conectores: {equipos_rescate.conectores}, Cantidad: {equipos_rescate.cantidad}, Estante ID: {equipos_rescate.estante_id}"
+
         equipos_rescate.arnes = request.form['arnes']
         equipos_rescate.eslingas = request.form['eslingas']
         equipos_rescate.posicionamiento = request.form['posicionamiento']
@@ -65,11 +81,21 @@ def edit_equipos_rescate(idequiposrescate):
         equipos_rescate.estante_id = request.form['estante_id']
 
         db.session.commit()
+
+        # Registro en el historial
+        nuevo_historial = Historial(
+            usuario_id=current_user.id,
+            tabla="EquiposRescate",
+            accion=f"Editó equipo de rescate (antes: {datos_anteriores}, después: Arnes: {equipos_rescate.arnes}, Eslingas: {equipos_rescate.eslingas}, Posicionamiento: {equipos_rescate.posicionamiento}, Caída en Y: {equipos_rescate.caida_en_y}, Conectores: {equipos_rescate.conectores}, Cantidad: {equipos_rescate.cantidad}, Estante ID: {equipos_rescate.estante_id})",
+            fecha=datetime.utcnow()
+        )
+        db.session.add(nuevo_historial)
+        db.session.commit()
+
         flash('Equipo de rescate actualizado exitosamente', 'success')
         return redirect(url_for('equipos_rescate.get_equipos_rescate'))
     
     estantes = Estantes.query.all()
-
     return render_template('rescate/edit.html', equipos_rescate=equipos_rescate, estantes=estantes)
 
 # Ruta para eliminar un equipo de rescate
@@ -77,7 +103,22 @@ def edit_equipos_rescate(idequiposrescate):
 @login_required
 def delete_equipos_rescate(idequiposrescate):
     equipos_rescate = EquiposRescate.query.get_or_404(idequiposrescate)
+
+    # Guardamos los detalles del equipo eliminado para el historial
+    detalles = f"Arnes: {equipos_rescate.arnes}, Eslingas: {equipos_rescate.eslingas}, Posicionamiento: {equipos_rescate.posicionamiento}, Caída en Y: {equipos_rescate.caida_en_y}, Conectores: {equipos_rescate.conectores}, Cantidad: {equipos_rescate.cantidad}, Estante ID: {equipos_rescate.estante_id}"
+
     db.session.delete(equipos_rescate)
     db.session.commit()
+
+    # Registro en el historial
+    nuevo_historial = Historial(
+        usuario_id=current_user.id,
+        tabla="EquiposRescate",
+        accion=f"Eliminó equipo de rescate: {detalles}",
+        fecha=datetime.utcnow()
+    )
+    db.session.add(nuevo_historial)
+    db.session.commit()
+
     flash('Equipo de rescate eliminado exitosamente', 'success')
     return redirect(url_for('equipos_rescate.get_equipos_rescate'))

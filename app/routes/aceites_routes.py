@@ -33,11 +33,12 @@ def add_aceites():
         db.session.add(new_aceite)
         db.session.commit()
 
-        # Registrar en el historial
+        # Registrar en el historial con toda la información del aceite agregado
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="Aceites",
-            accion=f"Agregó aceite '{nombre}'",
+            accion=f"Agregó aceite - Nombre: {nombre}, Tipo: {tipo_de_aceite}, Cantidad: {cantidad}, Estante ID: {estante_id}",
+            registro_id=new_aceite.id,
             fecha=datetime.utcnow()
         )
         db.session.add(nuevo_historial)
@@ -48,6 +49,8 @@ def add_aceites():
 
     estantes = Estantes.query.all()
     return render_template('aceites/add.html', estantes=estantes)
+
+
 
 @bp.route('/aceites/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -62,11 +65,12 @@ def edit_aceites(id):
 
         db.session.commit()
 
-        # Registrar en el historial
+        # Registrar en el historial con toda la información del aceite editado
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="Aceites",
-            accion=f"Editó aceite '{aceite.nombre}'",
+            accion=f"Editó aceite - Nombre: {aceite.nombre}, Tipo: {aceite.tipo_de_aceite}, Cantidad: {aceite.cantidad}, Estante ID: {aceite.estante_id}",
+            registro_id=aceite.id,
             fecha=datetime.utcnow()
         )
         db.session.add(nuevo_historial)
@@ -78,6 +82,8 @@ def edit_aceites(id):
     estantes = Estantes.query.all()
     return render_template('aceites/edit.html', aceite=aceite, estantes=estantes)
 
+
+
 @bp.route('/aceites/delete/<int:id>', methods=['POST'])
 @login_required
 def delete_aceites(id):
@@ -85,11 +91,12 @@ def delete_aceites(id):
     db.session.delete(aceite)
     db.session.commit()
 
-    # Registrar en el historial
+    # Registrar en el historial con toda la información del aceite eliminado
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="Aceites",
-        accion=f"Eliminó aceite '{aceite.nombre}'",
+        accion=f"Eliminó aceite - Nombre: {aceite.nombre}, Tipo: {aceite.tipo_de_aceite}, Cantidad: {aceite.cantidad}, Estante ID: {aceite.estante_id}",
+        registro_id=aceite.id,
         fecha=datetime.utcnow()
     )
     db.session.add(nuevo_historial)
@@ -97,3 +104,5 @@ def delete_aceites(id):
 
     flash('Aceite eliminado exitosamente', 'success')
     return redirect(url_for('aceites.get_aceites'))
+
+
