@@ -24,7 +24,6 @@ def add_media_tension():
         observacion = request.form['observacion']
         estante_id = request.form['estante_id']
 
-        # Verificar si el estante_id existe
         estante = Estantes.query.get(estante_id)
         if estante is None:
             flash('El estante con el ID proporcionado no existe.', 'error')
@@ -40,7 +39,6 @@ def add_media_tension():
         db.session.add(new_equipobt)
         db.session.commit()
 
-        # Registro en el historial
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="EquiposMediaTension",
@@ -62,7 +60,6 @@ def edit_media_tension(idmediatension):
     media_tension = EquiposMediaTension.query.get_or_404(idmediatension)
 
     if request.method == 'POST':
-        # Guardamos los datos antiguos para registrar cambios
         datos_anteriores = f"Unidad medida: {media_tension.unidad_medida}, Descripción: {media_tension.descripcion_producto}, Cantidad: {media_tension.cantidad}, Observación: {media_tension.observacion}, Estante ID: {media_tension.estante_id}"
 
         media_tension.unidad_medida = request.form['unidad_medida']
@@ -73,7 +70,6 @@ def edit_media_tension(idmediatension):
 
         db.session.commit()
 
-        # Registro en el historial
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="EquiposMediaTension",
@@ -94,13 +90,11 @@ def edit_media_tension(idmediatension):
 def delete_media_tension(idmediatension):
     equipobt = EquiposMediaTension.query.get_or_404(idmediatension)
 
-    # Guardamos los detalles del equipo eliminado para el historial
     detalles = f"Unidad medida: {equipobt.unidad_medida}, Descripción: {equipobt.descripcion_producto}, Cantidad: {equipobt.cantidad}, Observación: {equipobt.observacion}, Estante ID: {equipobt.estante_id}"
 
     db.session.delete(equipobt)
     db.session.commit()
 
-    # Registro en el historial
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="EquiposMediaTension",

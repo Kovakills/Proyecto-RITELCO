@@ -1,4 +1,3 @@
-# app/routes/estante_routes.py
 from flask import Blueprint, request, jsonify
 from ..models.estante import Estantes 
 from .. import db

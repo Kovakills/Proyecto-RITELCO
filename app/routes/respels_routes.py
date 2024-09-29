@@ -8,14 +8,12 @@ from datetime import datetime
 
 bp = Blueprint('respel', __name__)
 
-# Ruta para obtener todos los refrigerantes
 @bp.route('/respel', methods=['GET'])
 @login_required
 def get_respel():
     data = Respels.query.all()
     return render_template('respel/index.html', data=data)
 
-# Ruta para agregar un nuevo refrigerante
 @bp.route('/respel/add', methods=['GET', 'POST'])
 @login_required
 def add_respel():
@@ -26,7 +24,7 @@ def add_respel():
         cantidad = request.form['cantidad']
         observacion = request.form['observacion']
 
-        # Verificar si el estante_id existe
+        
         estante = Estantes.query.get(estante_id)
         if estante is None:
             flash('El estante con el ID proporcionado no existe.', 'error')
@@ -42,7 +40,7 @@ def add_respel():
         db.session.add(new_respel)
         db.session.commit()
 
-        # Registro en el historial
+    
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="Respels",
@@ -58,14 +56,13 @@ def add_respel():
     estantes = Estantes.query.all()
     return render_template('respel/add.html', estantes=estantes)
 
-# Ruta para editar un refrigerante
+
 @bp.route('/respel/edit/<int:idrespel>', methods=['GET', 'POST'])
 @login_required
 def edit_respel(idrespel):
     respel = Respels.query.get_or_404(idrespel)
 
     if request.method == 'POST':
-        # Guardamos los datos antiguos para registrar cambios
         datos_anteriores = f"Nombre: {respel.nombre}, Descripción: {respel.descripcion_producto}, Cantidad: {respel.cantidad}, Estante ID: {respel.estante_id}, Observación: {respel.observacion}"
 
         respel.nombre = request.form['nombre']
@@ -76,7 +73,7 @@ def edit_respel(idrespel):
 
         try:
             db.session.commit()
-            # Registro en el historial
+        
             nuevo_historial = Historial(
                 usuario_id=current_user.id,
                 tabla="Respels",
@@ -97,19 +94,18 @@ def edit_respel(idrespel):
     estantes = Estantes.query.all()
     return render_template('respel/edit.html', respel=respel, estantes=estantes)
 
-# Ruta para eliminar un refrigerante
+
 @bp.route('/respel/delete/<int:idrespel>', methods=['POST'])
 @login_required
 def delete_respel(idrespel):
     respel = Respels.query.get_or_404(idrespel)
 
-    # Guardamos los detalles del refrigerante eliminado para el historial
     detalles = f"Nombre: {respel.nombre}, Descripción: {respel.descripcion_producto}, Cantidad: {respel.cantidad}, Estante ID: {respel.estante_id}, Observación: {respel.observacion}"
 
     db.session.delete(respel)
     db.session.commit()
 
-    # Registro en el historial
+
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="Respels",

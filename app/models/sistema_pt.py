@@ -1,4 +1,3 @@
-# app/models/sistema_pt.py
 from .. import db
 
 class SistemaPT(db.Model):

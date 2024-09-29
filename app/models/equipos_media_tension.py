@@ -1,4 +1,3 @@
-# app/models/equipos_media_tension.py
 from .. import db
 
 class EquiposMediaTension(db.Model):

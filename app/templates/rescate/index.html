@@ -52,7 +52,6 @@
                 {% endfor %}
             </div>
         </div>
-        <!-- Botón de agregar debajo de la tabla -->
         <div class="d-flex justify-content-between mt-4">
             <a href="{{ url_for('equipos.get_spt') }}" class="btn-back">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -78,16 +77,16 @@
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByClassName("table-cell");
             var match = false;
-            for (var j = 0; j < cells.length - 1; j++) { // No incluyas la columna de acciones en la búsqueda
+            for (var j = 0; j < cells.length - 1; j++) { 
                 if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
                     match = true;
                     break;
                 }
             }
             if (match) {
-                rows[i].style.display = "flex"; // Mostrar la fila si coincide
+                rows[i].style.display = "flex"; 
             } else {
-                rows[i].style.display = "none"; // Ocultar la fila si no coincide
+                rows[i].style.display = "none"; 
             }
         }
     }
@@ -301,6 +300,7 @@
         background: #27a9c0;
         transition: background 0s;
     }
+
     .btn-back {
         --color: #27a9c0;
         font-family: inherit;

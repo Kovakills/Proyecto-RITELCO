@@ -73,7 +73,8 @@
             height: 44px;
         }
 
-        .btn-add, .btn-back {
+        .btn-add,
+        .btn-back {
             --color: #27a9c0;
             font-family: inherit;
             display: inline-flex;
@@ -97,7 +98,8 @@
             text-decoration: none;
         }
 
-        .btn-add:before, .btn-back:before {
+        .btn-add:before,
+        .btn-back:before {
             content: "";
             position: absolute;
             z-index: -1;
@@ -110,17 +112,20 @@
             transition: all 0.7s;
         }
 
-        .btn-add:hover, .btn-back:hover {
+        .btn-add:hover,
+        .btn-back:hover {
             color: #ffffff;
             text-decoration: none;
         }
 
-        .btn-add:hover:before, .btn-back:hover:before {
+        .btn-add:hover:before,
+        .btn-back:hover:before {
             top: -30px;
             left: -30px;
         }
 
-        .btn-add:active:before, .btn-back:active:before {
+        .btn-add:active:before,
+        .btn-back:active:before {
             background: #27a9c0;
             transition: background 0s;
         }
@@ -129,72 +134,70 @@
             margin-right: 8px;
         }
 
-        /* Estilo minimalista para el selector de estante */
-.select-container {
-    position: relative;
-    width: 100%;
-    margin-bottom: 20px;
-}
+        .select-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-.select-container select {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 100%;
-    padding: 12px 15px;
-    font-size: 1em;
-    background-color: rgba(42, 43, 56, 0.8);
-    border: 2px solid #27a9c0;
-    border-radius: 12px;
-    color: #ffffff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        .select-container select {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1em;
+            background-color: rgba(42, 43, 56, 0.8);
+            border: 2px solid #27a9c0;
+            border-radius: 12px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.select-container select:focus {
-    outline: none;
-    border-color: #3ac7de;
-    box-shadow: 0 0 0 3px rgba(39, 169, 192, 0.3);
-    background-color: rgba(42, 43, 56, 1);
-}
+        .select-container select:focus {
+            outline: none;
+            border-color: #3ac7de;
+            box-shadow: 0 0 0 3px rgba(39, 169, 192, 0.3);
+            background-color: rgba(42, 43, 56, 1);
+        }
 
-.select-container::after {
-    content: '\25BC';
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    color: #27a9c0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
+        .select-container::after {
+            content: '\25BC';
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            color: #27a9c0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
 
-.select-container:hover::after {
-    color: #3ac7de;
-}
+        .select-container:hover::after {
+            color: #3ac7de;
+        }
 
-.select-container select option {
-    background-color: #2a2b38;
-    color: #ffffff;
-}
+        .select-container select option {
+            background-color: #2a2b38;
+            color: #ffffff;
+        }
 
-.select-label {
-    position: absolute;
-    top: -14px;
-    left: 15px;
-    background-color: #1f2029;
-    padding: 0 10px;
-    font-size: 0.85em;
-    color: #27a9c0;
-    transition: all 0.3s ease;
-}
+        .select-label {
+            position: absolute;
+            top: -14px;
+            left: 15px;
+            background-color: #1f2029;
+            padding: 0 10px;
+            font-size: 0.85em;
+            color: #27a9c0;
+            transition: all 0.3s ease;
+        }
 
-.select-container select:focus + .select-label,
-.select-container select:valid + .select-label {
-    color: #3ac7de;
-    transform: translateY(-5px);
-}
-
+        .select-container select:focus+.select-label,
+        .select-container select:valid+.select-label {
+            color: #3ac7de;
+            transform: translateY(-5px);
+        }
     </style>
 
     <div class="container mt-5">
@@ -233,7 +236,6 @@
                 <i></i>
             </div>
 
-            <!-- Select container para el selector de estante -->
             <div class="select-container">
                 <select id="estante_id" name="estante_id" required>
                     <option value="" disabled selected>Selecciona un estante</option>

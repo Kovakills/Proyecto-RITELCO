@@ -1,4 +1,3 @@
-# app/models/respels.py
 from .. import db
 
 class Respels(db.Model):

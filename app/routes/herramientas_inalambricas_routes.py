@@ -8,14 +8,12 @@ from datetime import datetime
 
 bp = Blueprint('herramientas_inalambricas', __name__)
 
-# Ruta para obtener todas las herramientas inalámbricas
 @bp.route('/herramientas_inalambricas', methods=['GET'])
 @login_required
 def get_herramientas_inalambricas():
     data = HerramientasInalambricas.query.all()
     return render_template('inalambricas/index.html', data=data)
 
-# Ruta para agregar una nueva herramienta inalámbrica
 @bp.route('/herramientas_inalambricas/add', methods=['GET', 'POST'])
 @login_required
 def add_herramientas_inalambricas():
@@ -28,7 +26,6 @@ def add_herramientas_inalambricas():
         observacion = request.form['observacion']
         estante_id = request.form['estante_id']
 
-        # Verificar si el estante_id existe
         estante = Estantes.query.get(estante_id)
         if estante is None:
             flash('El estante con el ID proporcionado no existe.', 'error')
@@ -46,7 +43,7 @@ def add_herramientas_inalambricas():
         db.session.add(new_equipo)
         db.session.commit()
 
-        # Registro en el historial
+
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="HerramientasInalambricas",
@@ -62,14 +59,12 @@ def add_herramientas_inalambricas():
     estantes = Estantes.query.all()
     return render_template('inalambricas/add.html', estantes=estantes)
 
-# Ruta para editar una herramienta inalámbrica
 @bp.route('/herramientas_inalambricas/edit/<int:idherramientasinalambricas>', methods=['GET', 'POST'])
 @login_required
 def edit_herramientas_inalambricas(idherramientasinalambricas):
     herramientas_inalambricas = HerramientasInalambricas.query.get_or_404(idherramientasinalambricas)
 
     if request.method == 'POST':
-        # Guardamos los datos antiguos para registrar cambios
         datos_anteriores = f"Nombre: {herramientas_inalambricas.nombre}, Marca: {herramientas_inalambricas.marca}, Modelo: {herramientas_inalambricas.modelo}, Fecha de adquisición: {herramientas_inalambricas.fecha_adquisicion}, Descripción: {herramientas_inalambricas.descripcion_producto}, Observación: {herramientas_inalambricas.observacion}, Estante ID: {herramientas_inalambricas.estante_id}"
 
         herramientas_inalambricas.nombre = request.form['nombre']
@@ -82,7 +77,7 @@ def edit_herramientas_inalambricas(idherramientasinalambricas):
 
         db.session.commit()
 
-        # Registro en el historial
+
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="HerramientasInalambricas",
@@ -98,19 +93,16 @@ def edit_herramientas_inalambricas(idherramientasinalambricas):
     estantes = Estantes.query.all()
     return render_template('inalambricas/edit.html', herramientas_inalambricas=herramientas_inalambricas, estantes=estantes)
 
-# Ruta para eliminar una herramienta inalámbrica
 @bp.route('/herramientas_inalambricas/delete/<int:idherramientasinalambricas>', methods=['POST'])
 @login_required
 def delete_herramientas_inalambricas(idherramientasinalambricas):
     herramientas_inalambricas = HerramientasInalambricas.query.get_or_404(idherramientasinalambricas)
 
-    # Guardamos los detalles de la herramienta eliminada para el historial
     detalles = f"Nombre: {herramientas_inalambricas.nombre}, Marca: {herramientas_inalambricas.marca}, Modelo: {herramientas_inalambricas.modelo}, Fecha de adquisición: {herramientas_inalambricas.fecha_adquisicion}, Descripción: {herramientas_inalambricas.descripcion_producto}, Observación: {herramientas_inalambricas.observacion}, Estante ID: {herramientas_inalambricas.estante_id}"
 
     db.session.delete(herramientas_inalambricas)
     db.session.commit()
 
-    # Registro en el historial
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="HerramientasInalambricas",

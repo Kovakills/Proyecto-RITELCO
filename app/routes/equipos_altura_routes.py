@@ -8,14 +8,14 @@ from datetime import datetime
 
 bp = Blueprint('equipos_alturas', __name__)
 
-# Ruta para obtener todos los equipos de alturas
+
 @bp.route('/equipos_alturas', methods=['GET'])
 @login_required
 def get_equipos_alturas():
     data = EquiposAltura.query.all()
     return render_template('alturas/index.html', data=data)
 
-# Ruta para agregar un nuevo equipo de alturas
+
 @bp.route('/equipos_alturas/add', methods=['GET', 'POST'])
 @login_required
 def add_equipos_alturas():
@@ -28,7 +28,6 @@ def add_equipos_alturas():
         cantidad = request.form['cantidad']
         estante_id = request.form['estante_id']
 
-        # Verificar si el estante_id existe
         estante = Estantes.query.get(estante_id)
         if estante is None:
             flash('El estante con el ID proporcionado no existe.', 'error')
@@ -46,7 +45,6 @@ def add_equipos_alturas():
         db.session.add(new_equipo)
         db.session.commit()
 
-        # Registro en el historial con todos los detalles
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="EquiposAltura",
@@ -62,14 +60,12 @@ def add_equipos_alturas():
     estantes = Estantes.query.all()
     return render_template('alturas/add.html', estantes=estantes)
 
-# Ruta para editar un equipo de altura
 @bp.route('/equipos_alturas/edit/<int:idequiposaltura>', methods=['GET', 'POST'])
 @login_required
 def edit_equipos_alturas(idequiposaltura):
     equipos_alturas = EquiposAltura.query.get_or_404(idequiposaltura)
 
     if request.method == 'POST':
-        # Guardamos los datos antiguos para registrar cambios
         datos_anteriores = f"Arnes: {equipos_alturas.arnes}, Eslingas: {equipos_alturas.eslingas}, Posicionamiento: {equipos_alturas.posicionamiento}, Caída en Y: {equipos_alturas.caida_en_y}, Conectores: {equipos_alturas.conectores}, Cantidad: {equipos_alturas.cantidad}, Estante ID: {equipos_alturas.estante_id}"
 
         equipos_alturas.arnes = request.form['arnes']
@@ -82,7 +78,6 @@ def edit_equipos_alturas(idequiposaltura):
 
         db.session.commit()
 
-        # Registro en el historial con los cambios
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="EquiposAltura",
@@ -98,19 +93,16 @@ def edit_equipos_alturas(idequiposaltura):
     estantes = Estantes.query.all()
     return render_template('alturas/edit.html', equipos_alturas=equipos_alturas, estantes=estantes)
 
-# Ruta para eliminar un equipo de altura
 @bp.route('/equipos_alturas/delete/<int:idequiposaltura>', methods=['POST'])
 @login_required
 def delete_equipos_alturas(idequiposaltura):
     equipos_alturas = EquiposAltura.query.get_or_404(idequiposaltura)
 
-    # Guardamos los detalles del equipo eliminado para el historial
     detalles = f"Arnes: {equipos_alturas.arnes}, Eslingas: {equipos_alturas.eslingas}, Posicionamiento: {equipos_alturas.posicionamiento}, Caída en Y: {equipos_alturas.caida_en_y}, Conectores: {equipos_alturas.conectores}, Cantidad: {equipos_alturas.cantidad}, Estante ID: {equipos_alturas.estante_id}"
 
     db.session.delete(equipos_alturas)
     db.session.commit()
 
-    # Registro en el historial
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="EquiposAltura",

@@ -8,14 +8,14 @@ from datetime import datetime
 
 bp = Blueprint('sistema_pt', __name__)
 
-# Ruta para obtener todos los sistemas de puesta a tierra
+
 @bp.route('/sistema_pt', methods=['GET'])
 @login_required
 def get_sistema_pt(): 
     data = SistemaPT.query.all()
     return render_template('pt/index.html', data=data)
 
-# Ruta para agregar un nuevo sistema de puesta a tierra
+
 @bp.route('/sistema_pt/add', methods=['GET', 'POST'])
 @login_required
 def add_sistema_pt():
@@ -41,7 +41,7 @@ def add_sistema_pt():
         db.session.add(new_equipobt)
         db.session.commit()
 
-        # Registro en el historial
+
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="SistemaPT",
@@ -57,14 +57,14 @@ def add_sistema_pt():
     estantes = Estantes.query.all()
     return render_template('pt/add.html', estantes=estantes)
 
-# Ruta para editar un sistema de puesta a tierra
+
 @bp.route('/sistema_pt/edit/<int:idsistemapt>', methods=['GET', 'POST'])
 @login_required
 def edit_sistema_pt(idsistemapt):
     sistema_pt = SistemaPT.query.get_or_404(idsistemapt)
 
     if request.method == 'POST':
-        # Guardamos los datos antiguos para registrar cambios
+
         datos_anteriores = f"Unidad de medida: {sistema_pt.unidad_medida}, Descripción: {sistema_pt.descripcion_producto}, Cantidad: {sistema_pt.cantidad}, Estante ID: {sistema_pt.estante_id}, Observación: {sistema_pt.observacion}"
 
         sistema_pt.unidad_medida = request.form['unidad_medida']
@@ -75,7 +75,7 @@ def edit_sistema_pt(idsistemapt):
         
         db.session.commit()
         
-        # Registro en el historial
+
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="SistemaPT",
@@ -91,19 +91,19 @@ def edit_sistema_pt(idsistemapt):
     estantes = Estantes.query.all()
     return render_template('pt/edit.html', sistema_pt=sistema_pt, estantes=estantes)
 
-# Ruta para eliminar un sistema de puesta a tierra
+
 @bp.route('/sistema_pt/delete/<int:idsistemapt>', methods=['POST'])
 @login_required
 def delete_sistema_pt(idsistemapt):
     equipobt = SistemaPT.query.get_or_404(idsistemapt)
 
-    # Guardamos los detalles del sistema de puesta a tierra eliminado para el historial
+
     detalles = f"Unidad de medida: {equipobt.unidad_medida}, Descripción: {equipobt.descripcion_producto}, Cantidad: {equipobt.cantidad}, Estante ID: {equipobt.estante_id}, Observación: {equipobt.observacion}"
 
     db.session.delete(equipobt)
     db.session.commit()
 
-    # Registro en el historial
+
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="SistemaPT",

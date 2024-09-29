@@ -8,14 +8,14 @@ from datetime import datetime
 
 bp = Blueprint('herramientas_electricas', __name__)
 
-# Ruta para obtener todas las herramientas eléctricas
+
 @bp.route('/herramientas_electricas', methods=['GET'])
 @login_required
 def get_herramientas_electricas():
     data = HerramientasElectricas.query.all()
     return render_template('electricas/index.html', data=data)
 
-# Ruta para agregar una nueva herramienta eléctrica
+
 @bp.route('/herramientas_electricas/add', methods=['GET', 'POST'])
 @login_required
 def add_herramientas_electricas():
@@ -28,7 +28,7 @@ def add_herramientas_electricas():
         observacion = request.form['observacion']
         estante_id = request.form['estante_id']
 
-        # Verificar si el estante_id existe
+
         estante = Estantes.query.get(estante_id)
         if estante is None:
             flash('El estante con el ID proporcionado no existe.', 'error')
@@ -46,7 +46,7 @@ def add_herramientas_electricas():
         db.session.add(new_equipo)
         db.session.commit()
 
-        # Registro en el historial
+    
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="HerramientasElectricas",
@@ -62,14 +62,14 @@ def add_herramientas_electricas():
     estantes = Estantes.query.all()
     return render_template('electricas/add.html', estantes=estantes)
 
-# Ruta para editar una herramienta eléctrica
+
 @bp.route('/herramientas_electricas/edit/<int:idherramientaselectricas>', methods=['GET', 'POST'])
 @login_required
 def edit_herramientas_electricas(idherramientaselectricas):
     herramientas_electricas = HerramientasElectricas.query.get_or_404(idherramientaselectricas)
 
     if request.method == 'POST':
-        # Guardamos los datos antiguos para registrar cambios
+
         datos_anteriores = f"Nombre: {herramientas_electricas.nombre}, Marca: {herramientas_electricas.marca}, Modelo: {herramientas_electricas.modelo}, Fecha de adquisición: {herramientas_electricas.fecha_adquisicion}, Descripción: {herramientas_electricas.descripcion_producto}, Observación: {herramientas_electricas.observacion}, Estante ID: {herramientas_electricas.estante_id}"
 
         herramientas_electricas.nombre = request.form['nombre']
@@ -82,7 +82,7 @@ def edit_herramientas_electricas(idherramientaselectricas):
 
         db.session.commit()
 
-        # Registro en el historial
+    
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="HerramientasElectricas",
@@ -98,19 +98,18 @@ def edit_herramientas_electricas(idherramientaselectricas):
     estantes = Estantes.query.all()
     return render_template('electricas/edit.html', herramientas_electricas=herramientas_electricas, estantes=estantes)
 
-# Ruta para eliminar una herramienta eléctrica
 @bp.route('/herramientas_electricas/delete/<int:idherramientaselectricas>', methods=['POST'])
 @login_required
 def delete_herramientas_electricas(idherramientaselectricas):
     herramientas_electricas = HerramientasElectricas.query.get_or_404(idherramientaselectricas)
 
-    # Guardamos los detalles de la herramienta eliminada para el historial
+
     detalles = f"Nombre: {herramientas_electricas.nombre}, Marca: {herramientas_electricas.marca}, Modelo: {herramientas_electricas.modelo}, Fecha de adquisición: {herramientas_electricas.fecha_adquisicion}, Descripción: {herramientas_electricas.descripcion_producto}, Observación: {herramientas_electricas.observacion}, Estante ID: {herramientas_electricas.estante_id}"
 
     db.session.delete(herramientas_electricas)
     db.session.commit()
 
-    # Registro en el historial
+
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="HerramientasElectricas",

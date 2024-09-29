@@ -1,4 +1,3 @@
-# app/models/baja_tension.py
 from .. import db
 
 class BajaTension(db.Model):

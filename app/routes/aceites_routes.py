@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 from ..models.aceites import Aceites
 from ..models.estante import Estantes
-from ..models.historial import Historial  # Asegúrate de que el modelo Historial esté definido
+from ..models.historial import Historial  
 from .. import db
 from datetime import datetime
 
@@ -23,7 +23,7 @@ def add_aceites():
         cantidad = int(request.form['cantidad'])
         estante_id = request.form['estante_id']
 
-        # Verificar si el estante_id existe
+
         estante = Estantes.query.get(estante_id)
         if estante is None:
             flash('El estante con el ID proporcionado no existe.', 'error')
@@ -33,7 +33,6 @@ def add_aceites():
         db.session.add(new_aceite)
         db.session.commit()
 
-        # Registrar en el historial con toda la información del aceite agregado
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="Aceites",
@@ -65,7 +64,6 @@ def edit_aceites(id):
 
         db.session.commit()
 
-        # Registrar en el historial con toda la información del aceite editado
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="Aceites",
@@ -91,7 +89,6 @@ def delete_aceites(id):
     db.session.delete(aceite)
     db.session.commit()
 
-    # Registrar en el historial con toda la información del aceite eliminado
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="Aceites",

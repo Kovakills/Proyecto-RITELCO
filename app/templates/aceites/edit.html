@@ -14,7 +14,6 @@
             background-color: #1f2029;
         }
 
-        /* Estilo personalizado para los inputs */
         .inputbox {
             position: relative;
             width: 100%;
@@ -72,7 +71,8 @@
             height: 44px;
         }
 
-        .btn-add, .btn-back {
+        .btn-add,
+        .btn-back {
             --color: #27a9c0;
             font-family: inherit;
             display: inline-flex;
@@ -96,7 +96,8 @@
             text-decoration: none;
         }
 
-        .btn-add:before, .btn-back:before {
+        .btn-add:before,
+        .btn-back:before {
             content: "";
             position: absolute;
             z-index: -1;
@@ -109,17 +110,20 @@
             transition: all 0.7s;
         }
 
-        .btn-add:hover, .btn-back:hover {
+        .btn-add:hover,
+        .btn-back:hover {
             color: #ffffff;
             text-decoration: none;
         }
 
-        .btn-add:hover:before, .btn-back:hover:before {
+        .btn-add:hover:before,
+        .btn-back:hover:before {
             top: -30px;
             left: -30px;
         }
 
-        .btn-add:active:before, .btn-back:active:before {
+        .btn-add:active:before,
+        .btn-back:active:before {
             background: #27a9c0;
             transition: background 0s;
         }
@@ -128,7 +132,6 @@
             margin-right: 8px;
         }
 
-        /* Estilo minimalista para el selector de estante */
         .select-container {
             position: relative;
             width: 100%;
@@ -188,8 +191,8 @@
             transition: all 0.3s ease;
         }
 
-        .select-container select:focus + .select-label,
-        .select-container select:valid + .select-label {
+        .select-container select:focus+.select-label,
+        .select-container select:valid+.select-label {
             color: #3ac7de;
             transform: translateY(-5px);
         }
@@ -208,7 +211,8 @@
                 </div>
 
                 <div class="inputbox">
-                    <input type="text" name="tipo_de_aceite" id="tipo_de_aceite" value="{{ aceite.tipo_de_aceite }}" required>
+                    <input type="text" name="tipo_de_aceite" id="tipo_de_aceite" value="{{ aceite.tipo_de_aceite }}"
+                        required>
                     <span>Tipo de Aceite</span>
                     <i></i>
                 </div>
@@ -223,7 +227,8 @@
                     <select id="estante_id" name="estante_id" required>
                         <option value="" disabled>Selecciona un estante</option>
                         {% for estante in estantes %}
-                        <option value="{{ estante.id_estante }}" {% if estante.id_estante == aceite.estante_id %}selected{% endif %}>{{ estante.nombre }}</option>
+                        <option value="{{ estante.id_estante }}" {% if estante.id_estante==aceite.estante_id
+                            %}selected{% endif %}>{{ estante.nombre }}</option>
                         {% endfor %}
                     </select>
                     <label for="estante_id" class="select-label">Estante</label>
@@ -231,7 +236,9 @@
 
                 <div class="d-flex justify-content-between mt-4">
                     <a class="btn-back" onclick="window.history.back();">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-arrow-left">
                             <line x1="19" y1="12" x2="5" y2="12"></line>
                             <polyline points="12 19 5 12 12 5"></polyline>
                         </svg>

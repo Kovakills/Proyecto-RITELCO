@@ -1,4 +1,3 @@
-# app/models/herramientas_inalambricas.py
 from .. import db
 
 class HerramientasInalambricas(db.Model):

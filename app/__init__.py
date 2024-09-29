@@ -4,7 +4,6 @@ from flask_login import LoginManager
 import os
 import pymysql
 
-# Aquí es donde le decimos a SQLAlchemy que use pymysql como MySQLdb
 pymysql.install_as_MySQLdb()
 
 db = SQLAlchemy()
@@ -13,7 +12,7 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.urandom(24)
-    app.config.from_object('config.Config')  # Esto debe contener la URI de la base de datos
+    app.config.from_object('config.Config') 
 
     db.init_app(app)
     login_manager.init_app(app)
@@ -24,7 +23,6 @@ def create_app():
         from .models.usuario import Usuario
         return Usuario.query.get(int(user_id))
 
-    # Importar y registrar los blueprints
     from app.routes import (
         aceites_routes, equipos_altura_routes, sistema_pt_routes,
         baja_tension_routes, equipos_media_tension_routes,

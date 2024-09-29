@@ -1,4 +1,3 @@
-# app/models/filtros.py
 from .. import db
 
 class Filtros(db.Model):

@@ -39,7 +39,6 @@ def add_baja_tension():
         db.session.add(new_equipobt)
         db.session.commit()
 
-        # Registro en el historial con todos los detalles
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="BajaTension",
@@ -68,7 +67,7 @@ def edit_bajatension(idbajatension):
         observacion = request.form['observacion']
         estante_id = request.form['estante_id']
 
-        # Guardamos los datos antiguos para registrar cambios
+
         datos_anteriores = f"Equipo: {baja_tension.descripcion_producto}, Cantidad: {baja_tension.cantidad}, Unidad: {baja_tension.unidad_medida}, Observación: {baja_tension.observacion}, Estante ID: {baja_tension.estante_id}"
 
         baja_tension.unidad_medida = unidad_medida
@@ -79,7 +78,6 @@ def edit_bajatension(idbajatension):
 
         db.session.commit()
 
-        # Registro en el historial con cambios
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="BajaTension",
@@ -101,13 +99,11 @@ def edit_bajatension(idbajatension):
 def delete_baja_tension(idbajatension):
     equipobt = BajaTension.query.get_or_404(idbajatension)
 
-    # Guardamos los detalles del equipo eliminado para el historial
     detalles = f"Equipo: {equipobt.descripcion_producto}, Cantidad: {equipobt.cantidad}, Unidad: {equipobt.unidad_medida}, Observación: {equipobt.observacion}, Estante ID: {equipobt.estante_id}"
 
     db.session.delete(equipobt)
     db.session.commit()
 
-    # Registro en el historial
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="BajaTension",

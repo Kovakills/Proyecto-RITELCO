@@ -21,7 +21,7 @@ def add_filtros():
         estante_id = request.form['estante_id']
         referencia = request.form['referencia']
         cantidad = int(request.form['cantidad'])
-        observacion = request.form['observacion']  # Asegúrate de que este nombre coincida
+        observacion = request.form['observacion']  
 
         estante = Estantes.query.get(estante_id)
         if estante is None:
@@ -49,7 +49,7 @@ def edit_filtros(id):
         filtros.estante_id = request.form['estante_id']
         filtros.referencia = request.form['referencia']
         filtros.cantidad = int(request.form['cantidad'])
-        filtros.observacion = request.form['observacion']  # Asegúrate de que este nombre coincida
+        filtros.observacion = request.form['observacion']  
 
         try:
             db.session.commit()

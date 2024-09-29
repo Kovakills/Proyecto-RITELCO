@@ -8,14 +8,12 @@ from datetime import datetime
 
 bp = Blueprint('equipos_rescate', __name__)
 
-# Ruta para obtener todos los equipos de rescate
 @bp.route('/equipos_rescate', methods=['GET'])
 @login_required
 def get_equipos_rescate():
     data = EquiposRescate.query.all()
     return render_template('rescate/index.html', data=data)
 
-# Ruta para agregar un nuevo equipo de rescate
 @bp.route('/equipos_rescate/add', methods=['GET', 'POST'])
 @login_required
 def add_equipos_rescate():
@@ -28,7 +26,6 @@ def add_equipos_rescate():
         cantidad = request.form['cantidad']
         estante_id = request.form['estante_id']
 
-        # Verificar si el estante_id existe
         estante = Estantes.query.get(estante_id)
         if estante is None:
             flash('El estante con el ID proporcionado no existe.', 'error')
@@ -46,7 +43,7 @@ def add_equipos_rescate():
         db.session.add(new_equipo)
         db.session.commit()
 
-        # Registro en el historial
+
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="EquiposRescate",
@@ -62,14 +59,12 @@ def add_equipos_rescate():
     estantes = Estantes.query.all()
     return render_template('rescate/add.html', estantes=estantes)
 
-# Ruta para editar un equipo de rescate
 @bp.route('/equipos_rescate/edit/<int:idequiposrescate>', methods=['GET', 'POST'])
 @login_required
 def edit_equipos_rescate(idequiposrescate):
     equipos_rescate = EquiposRescate.query.get_or_404(idequiposrescate)
 
     if request.method == 'POST':
-        # Guardamos los datos antiguos para registrar cambios
         datos_anteriores = f"Arnes: {equipos_rescate.arnes}, Eslingas: {equipos_rescate.eslingas}, Posicionamiento: {equipos_rescate.posicionamiento}, Caída en Y: {equipos_rescate.caida_en_y}, Conectores: {equipos_rescate.conectores}, Cantidad: {equipos_rescate.cantidad}, Estante ID: {equipos_rescate.estante_id}"
 
         equipos_rescate.arnes = request.form['arnes']
@@ -82,7 +77,7 @@ def edit_equipos_rescate(idequiposrescate):
 
         db.session.commit()
 
-        # Registro en el historial
+
         nuevo_historial = Historial(
             usuario_id=current_user.id,
             tabla="EquiposRescate",
@@ -98,19 +93,16 @@ def edit_equipos_rescate(idequiposrescate):
     estantes = Estantes.query.all()
     return render_template('rescate/edit.html', equipos_rescate=equipos_rescate, estantes=estantes)
 
-# Ruta para eliminar un equipo de rescate
 @bp.route('/equipos_rescate/delete/<int:idequiposrescate>', methods=['POST'])
 @login_required
 def delete_equipos_rescate(idequiposrescate):
     equipos_rescate = EquiposRescate.query.get_or_404(idequiposrescate)
 
-    # Guardamos los detalles del equipo eliminado para el historial
     detalles = f"Arnes: {equipos_rescate.arnes}, Eslingas: {equipos_rescate.eslingas}, Posicionamiento: {equipos_rescate.posicionamiento}, Caída en Y: {equipos_rescate.caida_en_y}, Conectores: {equipos_rescate.conectores}, Cantidad: {equipos_rescate.cantidad}, Estante ID: {equipos_rescate.estante_id}"
 
     db.session.delete(equipos_rescate)
     db.session.commit()
 
-    # Registro en el historial
     nuevo_historial = Historial(
         usuario_id=current_user.id,
         tabla="EquiposRescate",

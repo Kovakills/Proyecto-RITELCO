@@ -1,4 +1,3 @@
-# app/models/herramientas_electricas.py
 from .. import db
 
 class HerramientasElectricas(db.Model):

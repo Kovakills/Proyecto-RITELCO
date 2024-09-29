@@ -651,13 +651,15 @@
                     <div class="card">
                         <i data-lucide="radio-tower" class="card-icon"></i>
                         <p class="tip">Infraestructura de Red</p>
-                        <p class="second-text">Diseño, instalación, mantenimiento preventivo y correctivo en equipos de transmision 
+                        <p class="second-text">Diseño, instalación, mantenimiento preventivo y correctivo en equipos de
+                            transmision
                             para redes móviles 4G y 5G.</p>
                     </div>
                     <div class="card">
                         <i data-lucide="settings" class="card-icon"></i>
                         <p class="tip">Mantenimiento Integral</p>
-                        <p class="second-text">Servicios de mantenimiento preventivo y correctivo para grupos electrogenos y sistemas hidridos.</p>
+                        <p class="second-text">Servicios de mantenimiento preventivo y correctivo para grupos
+                            electrogenos y sistemas hidridos.</p>
                     </div>
                     <div class="card">
                         <i data-lucide="zap" class="card-icon"></i>
@@ -681,7 +683,7 @@
                 <p>Riaño Telecomunicaciones es líder en el sector de infraestructura y servicios de telecomunicaciones,
                     con 12 años de experiencia en la implementación y mantenimiento de redes de última
                     generación.</p>
-                
+
                 <div id="stats" class="stats">
                     <div class="stat">
                         <h3 id="clients-count">0</h3>
@@ -735,10 +737,10 @@
                     </div>
                 </div>
                 <div class="question">
-                    <h3>¿Cual es el desempeño general de la empresa?<i
-                            data-lucide="chevron-down"></i></h3>
+                    <h3>¿Cual es el desempeño general de la empresa?<i data-lucide="chevron-down"></i></h3>
                     <div class="answer">
-                        <p>Atencion, diagnóstico y solucion oportuna a las fallas generadas en las estaciones bases de la red movil.</p>
+                        <p>Atencion, diagnóstico y solucion oportuna a las fallas generadas en las estaciones bases de
+                            la red movil.</p>
                     </div>
                 </div>
                 <div class="question">
@@ -812,17 +814,13 @@
     </div>
 
     <script>
-        // Manejar el envío del formulario
         document.getElementById('contact-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Show spinner
             document.getElementById('spinner').style.display = 'inline-block';
 
-            // Disable submit button
             this.querySelector('button[type="submit"]').disabled = true;
 
-            // Prepare the email parameters
             var templateParams = {
                 from_name: this.name.value,
                 from_email: this.email.value,
@@ -830,8 +828,7 @@
                 to_email: 'thekovakills@gmail.com'
             };
 
-            // Send the email using EmailJS
-            emailjs.send('default_service', 'template_id', templateParams) // Replace 'template_id' with your EmailJS template ID
+            emailjs.send('default_service', 'template_id', templateParams)
                 .then(function (response) {
                     console.log('SUCCESS!', response.status, response.text);
                     document.getElementById('notification').textContent = 'Mensaje enviado con éxito';
@@ -849,13 +846,11 @@
                     }, 3000);
                 })
                 .finally(function () {
-                    // Hide spinner and re-enable submit button
                     document.getElementById('spinner').style.display = 'none';
                     document.querySelector('#contact-form button[type="submit"]').disabled = false;
                 });
         });
 
-        // Cambiar el estilo del encabezado al hacer scroll
         window.addEventListener('scroll', function () {
             const header = document.getElementById('header');
             const backToTop = document.getElementById('back-to-top');
@@ -869,17 +864,16 @@
                 backToTop.classList.remove('visible');
             }
 
-            // Actualizar la barra de progreso
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById('progress-bar').style.width = scrolled + '%';
         });
 
-        // Inicializar los iconos de Lucide
+
         lucide.createIcons();
 
-        // Manejar el menú hamburguesa
+
         const menuToggle = document.getElementById('menu-toggle');
         const nav = document.getElementById('nav');
 
@@ -887,7 +881,6 @@
             nav.classList.toggle('active');
         });
 
-        // Animación de entrada para las secciones
         const sections = document.querySelectorAll('.services, .about, .contact, .inventario, .projects, .faq');
 
         const observer = new IntersectionObserver((entries) => {
@@ -905,13 +898,11 @@
             observer.observe(section);
         });
 
-        // Animación de parallax para el hero
         window.addEventListener('scroll', function () {
             const scrollPosition = window.pageYOffset;
             document.querySelector('.hero::before').style.transform = `translateY(${scrollPosition * 0.5}px)`;
         });
 
-        // Animación de estadísticas
         function animateValue(obj, start, end, duration) {
             let startTimestamp = null;
             const step = (timestamp) => {
@@ -931,7 +922,6 @@
             animateValue(document.getElementById('coverage-count'), 0, 3165, 2000);
         }
 
-        // Manejar el botón "Volver arriba"
         document.getElementById('back-to-top').addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
@@ -939,7 +929,6 @@
             });
         });
 
-        // Manejar las preguntas frecuentes
         const questions = document.querySelectorAll('.question');
         questions.forEach(question => {
             question.addEventListener('click', () => {
@@ -947,7 +936,6 @@
             });
         });
 
-        // Manejar el chat bot
         const chatBot = document.getElementById('chat-bot');
         const chatWindow = document.getElementById('chat-window');
         const chatMessages = document.getElementById('chat-messages');
@@ -970,7 +958,6 @@
             if (message) {
                 addMessage('user', message);
                 chatInput.value = '';
-                // Simular respuesta del bot
                 setTimeout(() => {
                     addMessage('bot', 'Gracias por tu mensaje. Un representante se pondrá en contacto contigo pronto.');
                 }, 1000);

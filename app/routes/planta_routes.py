@@ -1,4 +1,3 @@
-# planta_routes.py
 from flask import Blueprint, render_template
 
 bp = Blueprint('planta', __name__)
