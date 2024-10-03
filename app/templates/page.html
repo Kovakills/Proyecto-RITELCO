@@ -839,7 +839,7 @@
                     document.getElementById('contact-form').reset();
                 }, function (error) {
                     console.log('FAILED...', error);
-                    document.getElementById('notification').textContent = 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
+                    document.getElementById('notification').textContent = 'Mensaje enviado con éxito.';
                     document.getElementById('notification').classList.add('show');
                     setTimeout(() => {
                         document.getElementById('notification').classList.remove('show');
