@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Add Herramientas electricas{% endblock %}
+{% block title %}Add Herramientas{% endblock %}
 
 {% block content %}
 
@@ -200,7 +200,7 @@
 
     <div class="container mt-5">
         <h1>
-            <center>Add Herramientas electricas</center>
+            <center>Add Herramientas</center>
         </h1>
         <form method="POST" action="{{ url_for('herramientas_electricas.add_herramientas_electricas') }}">
             <div class="inputbox">
@@ -210,12 +210,12 @@
             </div>
             <div class="inputbox">
                 <input type="text" name="marca" id="marca" required>
-                <span>Marca</span>
+                <span>Herramienta</span>
                 <i></i>
             </div>
             <div class="inputbox">
                 <input type="text" name="modelo" id="modelo" required>
-                <span>Modelo</span>
+                <span>Herramienta</span>
                 <i></i>
             </div>
             <div class="inputbox1">
